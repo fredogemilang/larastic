@@ -162,8 +162,7 @@ class GitDeployService
             }
 
             // Configure git user
-            Process::path($this->repoDir)->run('git config user.email "cms@deploy.local"');
-            Process::path($this->repoDir)->run('git config user.name "CMS Deploy Bot"');
+            Process::path($this->repoDir)->run('git config user.name "Defenxor CMS"');
 
             Log::info("GitDeploy: Cloned repo to {$this->repoDir}");
         } else {
