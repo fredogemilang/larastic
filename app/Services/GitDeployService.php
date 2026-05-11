@@ -309,25 +309,44 @@ class GitDeployService
             ->limit(50)
             ->get();
 
-        // Build summary lines
+        // Build summary lines from revisions
         $lines = [];
         foreach ($revisions as $rev) {
             $lines[] = "- [{$rev->action}] {$rev->summary}";
         }
 
-        // Build title: short summary of changes
-        $postCount = $revisions->where('revisionable_type', 'App\\Models\\Post')->count();
-        $pageCount = $revisions->where('revisionable_type', 'App\\Models\\Page')->count();
+        // Collect unique item names for the title
+        $itemNames = $revisions->map(function ($rev) {
+            $model = $rev->revisionable;
+            return $model?->title ?? $model?->name ?? null;
+        })->filter()->unique()->values();
 
-        $parts = [];
-        if ($postCount > 0) $parts[] = "{$postCount} post" . ($postCount > 1 ? 's' : '');
-        if ($pageCount > 0) $parts[] = "{$pageCount} page" . ($pageCount > 1 ? 's' : '');
+        // Also grab names from scope_details (partial exports have this)
+        $scopeItems = $export->scope_details['items'] ?? [];
+        if (!empty($scopeItems) && $itemNames->isEmpty()) {
+            $itemNames = collect($scopeItems)->pluck('title')->filter()->unique()->values();
+        }
 
-        $title = !empty($parts)
-            ? 'Update ' . implode(', ', $parts)
-            : 'Content update';
-
+        // Build title with actual names
         $exportType = ucfirst($export->type);
+
+        if ($itemNames->count() <= 5 && $itemNames->isNotEmpty()) {
+            // Show names directly: "Update: About, Contact, Services"
+            $title = 'Update: ' . $itemNames->implode(', ');
+        } else {
+            // Too many — use counts
+            $postCount = $revisions->where('revisionable_type', 'App\\Models\\Post')->count();
+            $pageCount = $revisions->where('revisionable_type', 'App\\Models\\Page')->count();
+
+            $parts = [];
+            if ($postCount > 0) $parts[] = "{$postCount} post" . ($postCount > 1 ? 's' : '');
+            if ($pageCount > 0) $parts[] = "{$pageCount} page" . ($pageCount > 1 ? 's' : '');
+
+            $title = !empty($parts)
+                ? 'Update ' . implode(', ', $parts)
+                : 'Content update';
+        }
+
         $commitMessage = "{$title} ({$exportType} Export #{$export->id})";
 
         // Build PR body with change details
@@ -336,6 +355,16 @@ class GitDeployService
         $prBody .= "**Export type:** {$exportType}\n";
         $prBody .= "**Changes:** " . ($revisions->count() ?: 'N/A') . " revision(s)\n\n";
 
+        // Items summary
+        if ($itemNames->isNotEmpty()) {
+            $prBody .= "### Items\n\n";
+            foreach ($itemNames as $name) {
+                $prBody .= "- {$name}\n";
+            }
+            $prBody .= "\n";
+        }
+
+        // Detailed change log
         if (!empty($lines)) {
             $prBody .= "### Change Log\n\n";
             $prBody .= implode("\n", array_slice($lines, 0, 30)) . "\n";
