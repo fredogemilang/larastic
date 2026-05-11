@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\ContentRevision;
 use App\Models\Export;
 use App\Models\Setting;
 use Illuminate\Support\Facades\File;
@@ -102,6 +103,9 @@ class GitDeployService
 
         Log::info("GitDeploy: Starting deploy for Export #{$export->id} → branch {$branch}");
 
+        // Build change log from content revisions
+        $changeLog = $this->buildChangeLog($export);
+
         // 1. Ensure local repo clone exists
         $this->ensureRepo();
 
@@ -119,16 +123,13 @@ class GitDeployService
         }
 
         // 5. Create branch, commit, push
-        $this->pushBranch($branch, $export);
+        $this->pushBranch($branch, $export, $changeLog);
 
         // 6. Create Pull Request
-        $pr = $this->createPullRequest(
-            $branch,
-            "Deploy: CMS Export #{$export->id} — " . now()->format('M d, Y H:i')
-        );
+        $pr = $this->createPullRequest($branch, $changeLog);
 
         // 7. Auto-merge the PR
-        $merged = $this->mergePullRequest($pr['number']);
+        $merged = $this->mergePullRequest($pr['number'], $changeLog['title']);
 
         // 8. Cleanup: delete remote branch after merge
         if ($merged) {
@@ -290,9 +291,70 @@ class GitDeployService
     }
 
     /**
+     * Build a change log from ContentRevision records since last deploy.
+     *
+     * @return array{title: string, commit_message: string, pr_body: string}
+     */
+    protected function buildChangeLog(Export $export): array
+    {
+        // Find the last deployed export to get revisions since then
+        $lastDeployed = Export::where('deploy_status', 'deployed')
+            ->latest('deployed_at')
+            ->first();
+
+        $since = $lastDeployed?->deployed_at ?? $export->created_at->subDays(30);
+
+        $revisions = ContentRevision::where('created_at', '>', $since)
+            ->orderByDesc('created_at')
+            ->limit(50)
+            ->get();
+
+        // Build summary lines
+        $lines = [];
+        foreach ($revisions as $rev) {
+            $lines[] = "- [{$rev->action}] {$rev->summary}";
+        }
+
+        // Build title: short summary of changes
+        $postCount = $revisions->where('revisionable_type', 'App\\Models\\Post')->count();
+        $pageCount = $revisions->where('revisionable_type', 'App\\Models\\Page')->count();
+
+        $parts = [];
+        if ($postCount > 0) $parts[] = "{$postCount} post" . ($postCount > 1 ? 's' : '');
+        if ($pageCount > 0) $parts[] = "{$pageCount} page" . ($pageCount > 1 ? 's' : '');
+
+        $title = !empty($parts)
+            ? 'Update ' . implode(', ', $parts)
+            : 'Content update';
+
+        $exportType = ucfirst($export->type);
+        $commitMessage = "{$title} ({$exportType} Export #{$export->id})";
+
+        // Build PR body with change details
+        $prBody = "## 🚀 CMS Deploy — {$exportType} Export #{$export->id}\n\n";
+        $prBody .= "**Generated at:** " . now()->format('M d, Y H:i:s') . "\n";
+        $prBody .= "**Export type:** {$exportType}\n";
+        $prBody .= "**Changes:** " . ($revisions->count() ?: 'N/A') . " revision(s)\n\n";
+
+        if (!empty($lines)) {
+            $prBody .= "### Change Log\n\n";
+            $prBody .= implode("\n", array_slice($lines, 0, 30)) . "\n";
+            if (count($lines) > 30) {
+                $prBody .= "\n_...and " . (count($lines) - 30) . " more changes._\n";
+            }
+        }
+
+        return [
+            'title' => $commitMessage,
+            'commit_message' => $commitMessage,
+            'pr_body' => $prBody,
+        ];
+    }
+
+    /**
      * Create a new branch, stage all changes, commit, and push.
      */
-    protected function pushBranch(string $branch, Export $export): void
+    protected function pushBranch(string $branch, Export $export, array $changeLog): void
     {
         $repoDir = $this->repoDir;
 
@@ -305,8 +367,8 @@ class GitDeployService
         // Stage all changes
         Process::path($repoDir)->run('git add -A');
 
-        // Commit
-        $message = "Deploy: CMS Export #{$export->id} — " . now()->format('Y-m-d H:i:s');
+        // Commit with descriptive message
+        $message = str_replace('"', '\\"', $changeLog['commit_message']);
         $result = Process::path($repoDir)->run("git commit -m \"{$message}\"");
         if ($result->failed()) {
             throw new \Exception("Git commit failed: {$result->errorOutput()}");
@@ -328,15 +390,15 @@ class GitDeployService
      *
      * @return array{number: int, html_url: string}
      */
-    protected function createPullRequest(string $branch, string $title): array
+    protected function createPullRequest(string $branch, array $changeLog): array
     {
         $response = Http::withToken($this->token)
             ->withHeaders(['Accept' => 'application/vnd.github+json'])
             ->post("https://api.github.com/repos/{$this->repo}/pulls", [
-                'title' => $title,
+                'title' => $changeLog['title'],
                 'head' => $branch,
                 'base' => $this->baseBranch,
-                'body' => "Automated deployment from CMS.\n\n- Export ID: #{$branch}\n- Generated at: " . now()->toDateTimeString(),
+                'body' => $changeLog['pr_body'],
             ]);
 
         if ($response->failed()) {
@@ -355,13 +417,13 @@ class GitDeployService
     /**
      * Merge a Pull Request via GitHub API.
      */
-    protected function mergePullRequest(int $prNumber): bool
+    protected function mergePullRequest(int $prNumber, string $commitTitle): bool
     {
         $response = Http::withToken($this->token)
             ->withHeaders(['Accept' => 'application/vnd.github+json'])
             ->put("https://api.github.com/repos/{$this->repo}/pulls/{$prNumber}/merge", [
                 'merge_method' => 'squash',
-                'commit_title' => "Deploy from CMS",
+                'commit_title' => $commitTitle,
             ]);
 
         if ($response->successful()) {
