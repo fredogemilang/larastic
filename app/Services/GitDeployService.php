@@ -18,6 +18,7 @@ class GitDeployService
     protected string $token;
     protected string $repo; // "owner/repo"
     protected string $baseBranch;
+    protected bool $autoMerge;
 
     public function __construct()
     {
@@ -25,6 +26,7 @@ class GitDeployService
         $this->token = Setting::get('github_deploy_token', '');
         $this->repo = Setting::get('github_deploy_repo', '');
         $this->baseBranch = Setting::get('github_deploy_branch', 'main');
+        $this->autoMerge = (bool) Setting::get('github_deploy_auto_merge', true);
     }
 
     /**
@@ -128,12 +130,17 @@ class GitDeployService
         // 6. Create Pull Request
         $pr = $this->createPullRequest($branch, $changeLog);
 
-        // 7. Auto-merge the PR
-        $merged = $this->mergePullRequest($pr['number'], $changeLog['title']);
+        // 7. Auto-merge the PR (if enabled)
+        $merged = false;
+        if ($this->autoMerge) {
+            $merged = $this->mergePullRequest($pr['number'], $changeLog['title']);
 
-        // 8. Cleanup: delete remote branch after merge
-        if ($merged) {
-            $this->deleteRemoteBranch($branch);
+            // 8. Cleanup: delete remote branch after merge
+            if ($merged) {
+                $this->deleteRemoteBranch($branch);
+            }
+        } else {
+            Log::info("GitDeploy: Auto-merge disabled. PR #{$pr['number']} left open for review.");
         }
 
         return [
@@ -263,6 +270,7 @@ class GitDeployService
                     '.firebase',
                 ],
                 'headers' => [
+                    // Security headers for all resources
                     [
                         'source' => '**',
                         'headers' => [
@@ -275,6 +283,41 @@ class GitDeployService
                                 'key' => 'Content-Security-Policy',
                                 'value' => "default-src 'self'; script-src '{$cspHash}' 'strict-dynamic' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://analytics.ahrefs.com https://static.cloudflareinsights.com https://challenges.cloudflare.com https://ajax.cloudflare.com https: http:; style-src 'self' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.clarity.ms https://analytics.ahrefs.com https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; frame-src 'self' https://challenges.cloudflare.com; upgrade-insecure-requests;",
                             ],
+                        ],
+                    ],
+                    // HTML pages: no cache so content updates propagate immediately
+                    [
+                        'source' => '**/*.html',
+                        'headers' => [
+                            ['key' => 'Cache-Control', 'value' => 'no-cache'],
+                        ],
+                    ],
+                    // Images: long cache (1 year, immutable)
+                    [
+                        'source' => '**/*.@(webp|png|jpg|jpeg|gif|svg|ico|avif)',
+                        'headers' => [
+                            ['key' => 'Cache-Control', 'value' => 'public, max-age=31536000, immutable'],
+                        ],
+                    ],
+                    // CSS & JS: long cache (1 year, immutable)
+                    [
+                        'source' => '**/*.@(css|js)',
+                        'headers' => [
+                            ['key' => 'Cache-Control', 'value' => 'public, max-age=31536000, immutable'],
+                        ],
+                    ],
+                    // Fonts: long cache (1 year, immutable)
+                    [
+                        'source' => '**/*.@(woff|woff2|ttf|otf|eot)',
+                        'headers' => [
+                            ['key' => 'Cache-Control', 'value' => 'public, max-age=31536000, immutable'],
+                        ],
+                    ],
+                    // XML/JSON/TXT sitemaps & manifests: short cache (1 hour)
+                    [
+                        'source' => '**/*.@(xml|json|txt)',
+                        'headers' => [
+                            ['key' => 'Cache-Control', 'value' => 'public, max-age=3600'],
                         ],
                     ],
                 ],

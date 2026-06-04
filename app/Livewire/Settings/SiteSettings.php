@@ -41,6 +41,7 @@ class SiteSettings extends Component
     public string $github_deploy_token = '';
     public string $github_deploy_branch = 'main';
     public string $firebase_site_id = '';
+    public bool $github_deploy_auto_merge = true;
     public ?array $connectionTestResult = null;
 
     public string $activeTab = 'general';
@@ -74,6 +75,7 @@ class SiteSettings extends Component
         $this->github_deploy_token = Setting::get('github_deploy_token', '') ?? '';
         $this->github_deploy_branch = Setting::get('github_deploy_branch', 'main') ?? 'main';
         $this->firebase_site_id = Setting::get('firebase_site_id', 'defenxor-com') ?? 'defenxor-com';
+        $this->github_deploy_auto_merge = (bool) Setting::get('github_deploy_auto_merge', true);
     }
 
     public function saveGeneral(): void
@@ -151,6 +153,7 @@ class SiteSettings extends Component
         Setting::set('github_deploy_token', $this->github_deploy_token, 'deploy');
         Setting::set('github_deploy_branch', $this->github_deploy_branch, 'deploy');
         Setting::set('firebase_site_id', $this->firebase_site_id, 'deploy');
+        Setting::set('github_deploy_auto_merge', $this->github_deploy_auto_merge ? '1' : '0', 'deploy');
 
         $this->connectionTestResult = null;
         $this->dispatch('notify', type: 'success', message: 'Deploy settings saved.');

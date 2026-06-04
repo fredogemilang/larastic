@@ -143,6 +143,33 @@
                 </div>
             </div>
 
+            {{-- Auto-merge Toggle --}}
+            <div style="margin-bottom: 1.25rem; padding: 1rem; background: rgba(15,23,42,0.4); border: 1px solid rgba(148,163,184,0.15); border-radius: 0.5rem;">
+                <div style="display: flex; align-items: center; justify-content: space-between;">
+                    <div>
+                        <label style="font-size: 0.875rem; font-weight: 600; color: #e2e8f0; display: block; margin-bottom: 0.25rem;">Auto-merge Pull Requests</label>
+                        <p style="font-size: 0.75rem; color: #64748b; margin: 0;">
+                            @if($github_deploy_auto_merge)
+                                PRs will be automatically merged after creation. Changes go live immediately.
+                            @else
+                                PRs will be left open for manual review on GitHub before merging.
+                            @endif
+                        </p>
+                    </div>
+                    <button wire:click="$toggle('github_deploy_auto_merge')" type="button"
+                        style="position: relative; width: 48px; height: 26px; border-radius: 9999px; border: none; cursor: pointer; transition: background 0.2s; flex-shrink: 0;
+                        {{ $github_deploy_auto_merge ? 'background: linear-gradient(135deg, #22c55e, #10b981);' : 'background: rgba(148,163,184,0.2);' }}">
+                        <span style="position: absolute; top: 3px; width: 20px; height: 20px; border-radius: 50%; background: white; transition: left 0.2s; box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+                            {{ $github_deploy_auto_merge ? 'left: 25px;' : 'left: 3px;' }}"></span>
+                    </button>
+                </div>
+                @if(!$github_deploy_auto_merge)
+                <div style="margin-top: 0.75rem; padding: 0.5rem 0.75rem; background: rgba(251,191,36,0.08); border: 1px solid rgba(251,191,36,0.2); border-radius: 0.375rem; display: flex; align-items: center; gap: 0.375rem;">
+                    <span class="material-symbols-outlined" style="font-size: 1rem; color: #fbbf24;">info</span>
+                    <span style="font-size: 0.75rem; color: #fcd34d;">Editorial workflow: PRs require manual review and merge on GitHub.</span>
+                </div>
+                @endif
+            </div>
             {{-- Connection Test Result --}}
             @if($connectionTestResult)
             <div style="margin-bottom: 1.25rem; padding: 0.75rem 1rem; border-radius: 0.5rem; {{ $connectionTestResult['success'] ? 'background: rgba(34,197,94,0.08); border: 1px solid rgba(34,197,94,0.25); color: #86efac;' : 'background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.25); color: #fca5a5;' }} font-size: 0.8125rem; display: flex; align-items: center; gap: 0.5rem;">

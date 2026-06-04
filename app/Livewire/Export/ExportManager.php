@@ -321,13 +321,16 @@ class ExportManager extends Component
                 $this->dispatch('notify', type: 'success', message: 'No changes detected — deployment skipped.');
             } else {
                 $export->update([
-                    'deploy_status' => 'deployed',
+                    'deploy_status' => $result['merged'] ? 'deployed' : 'pr_created',
                     'deploy_pr_url' => $result['pr_url'],
-                    'deployed_at' => now(),
+                    'deployed_at' => $result['merged'] ? now() : null,
                 ]);
 
-                $mergedText = $result['merged'] ? ' and auto-merged' : '';
-                $this->dispatch('notify', type: 'success', message: "Deployed! PR created{$mergedText}.");
+                if ($result['merged']) {
+                    $this->dispatch('notify', type: 'success', message: 'Deployed! PR created and auto-merged.');
+                } else {
+                    $this->dispatch('notify', type: 'success', message: 'PR created! Waiting for manual review and merge on GitHub.');
+                }
             }
         } catch (\Throwable $e) {
             Log::error("Deploy to GitHub failed for Export #{$exportId}: {$e->getMessage()}", [

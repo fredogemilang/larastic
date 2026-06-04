@@ -357,6 +357,11 @@ Header set Content-Security-Policy "default-src 'self'; script-src '{{ $cspHash 
                                 <span class="material-symbols-outlined" style="font-size: 0.875rem;">check_circle</span>
                                 Deployed
                             </a>
+                            @elseif($export->deploy_status === 'pr_created')
+                            <a href="{{ $export->deploy_pr_url }}" target="_blank" style="padding: 0.25rem 0.625rem; border-radius: 9999px; font-size: 0.6875rem; font-weight: 600; background: rgba(251,191,36,0.15); color: #fcd34d; border: 1px solid rgba(251,191,36,0.3); text-decoration: none; display: inline-flex; align-items: center; gap: 0.25rem;">
+                                <span class="material-symbols-outlined" style="font-size: 0.875rem;">rate_review</span>
+                                PR Open
+                            </a>
                             @elseif($export->deploy_status === 'deploying')
                             <span style="padding: 0.25rem 0.625rem; border-radius: 9999px; font-size: 0.6875rem; font-weight: 600; background: rgba(251,191,36,0.15); color: #fcd34d; border: 1px solid rgba(251,191,36,0.3); display: inline-flex; align-items: center; gap: 0.25rem;">
                                 <span class="material-symbols-outlined" style="font-size: 0.875rem; animation: spin 2s linear infinite;">pending</span>
