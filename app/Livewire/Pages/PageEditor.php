@@ -17,7 +17,8 @@ use Mews\Purifier\Facades\Purifier;
 class PageEditor extends Component
 {
     #[Locked]
-    public int $pageId;
+    public ?int $pageId = null;
+    public bool $isCreatePage = false;
     public string $title = '';
     public string $slug = '';         // DB value — always URL-safe
     public string $slugDisplay = ''; // UI input — shows raw chars while typing
@@ -81,28 +82,42 @@ class PageEditor extends Component
         ],
     ];
 
-    public function mount(int $id): void
+    public function mount(?int $id = null): void
     {
         // Only admin/super_admin can edit pages
         if (!auth()->user()->hasAnyRole(['super_admin', 'admin'])) {
             abort(403, 'You do not have permission to edit pages.');
         }
 
-        $page = Page::findOrFail($id);
-        $this->pageId = $page->id;
-        $this->title = $page->title;
-        $this->slug = $page->slug;
-        $this->slugDisplay = $page->slug;
-        $this->slugManuallyEdited = true; // existing page — title changes won't touch slug
-        $this->template = $page->template;
-        $this->content_blocks = $page->content_blocks ?? [];
-        $this->status = $page->status;
-        $this->seo_title = $page->seo_title ?? '';
-        $this->seo_description = $page->seo_description ?? '';
-        $this->seo_image = $page->seo_image ?? '';
-        $this->canonical_url = $page->canonical_url ?? '';
-        $this->locale = $page->locale ?? 'id';
-        $this->translation_group_id = $page->translation_group_id;
+        $this->isCreatePage = !$id;
+
+        if ($id) {
+            $page = Page::findOrFail($id);
+            $this->pageId = $page->id;
+            $this->title = $page->title;
+            $this->slug = $page->slug;
+            $this->slugDisplay = $page->slug;
+            $this->slugManuallyEdited = true; // existing page — title changes won't touch slug
+            $this->template = $page->template;
+            $this->content_blocks = $page->content_blocks ?? [];
+            $this->status = $page->status;
+            $this->seo_title = $page->seo_title ?? '';
+            $this->seo_description = $page->seo_description ?? '';
+            $this->seo_image = $page->seo_image ?? '';
+            $this->canonical_url = $page->canonical_url ?? '';
+            $this->locale = $page->locale ?? 'id';
+            $this->translation_group_id = $page->translation_group_id;
+        }
+    }
+
+    /**
+     * Reset content blocks when template changes (create mode only).
+     */
+    public function updatedTemplate(): void
+    {
+        if ($this->isCreatePage) {
+            $this->content_blocks = [];
+        }
     }
 
     public function updatedTitle(string $value): void
@@ -286,23 +301,45 @@ class PageEditor extends Component
             ],
         ]);
 
-        $page = Page::findOrFail($this->pageId);
-        $page->update([
-            'title' => $this->title,
-            'slug' => $this->slug,
-            'url' => $this->slug,
-            'template' => $this->template,
-            'content_blocks' => $this->sanitizeBlocks($this->content_blocks),
-            'status' => $this->status,
-            'seo_title' => $this->seo_title ?: null,
-            'seo_description' => $this->seo_description ?: null,
-            'seo_image' => $this->seo_image ?: null,
-            'canonical_url' => $this->canonical_url ?: null,
-            'locale' => $this->locale,
-            'translation_group_id' => $this->translation_group_id,
-        ]);
+        if ($this->isCreatePage) {
+            // Create new page
+            $page = Page::create([
+                'title' => $this->title,
+                'slug' => $this->slug,
+                'url' => $this->slug,
+                'template' => $this->template,
+                'content_blocks' => $this->sanitizeBlocks($this->content_blocks),
+                'status' => $this->status,
+                'seo_title' => $this->seo_title ?: null,
+                'seo_description' => $this->seo_description ?: null,
+                'seo_image' => $this->seo_image ?: null,
+                'canonical_url' => $this->canonical_url ?: null,
+                'locale' => $this->locale,
+                'sort_order' => Page::max('sort_order') + 1,
+            ]);
 
-        $this->dispatch('notify', type: 'success', message: 'Page saved successfully.');
+            $this->dispatch('notify', type: 'success', message: 'Page created successfully.');
+            $this->redirect(route('admin.pages.edit', $page->id), navigate: true);
+        } else {
+            // Update existing page
+            $page = Page::findOrFail($this->pageId);
+            $page->update([
+                'title' => $this->title,
+                'slug' => $this->slug,
+                'url' => $this->slug,
+                'template' => $this->template,
+                'content_blocks' => $this->sanitizeBlocks($this->content_blocks),
+                'status' => $this->status,
+                'seo_title' => $this->seo_title ?: null,
+                'seo_description' => $this->seo_description ?: null,
+                'seo_image' => $this->seo_image ?: null,
+                'canonical_url' => $this->canonical_url ?: null,
+                'locale' => $this->locale,
+                'translation_group_id' => $this->translation_group_id,
+            ]);
+
+            $this->dispatch('notify', type: 'success', message: 'Page saved successfully.');
+        }
         $this->isSaving = false;
     }
 

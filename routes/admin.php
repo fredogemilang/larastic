@@ -50,6 +50,7 @@ Route::prefix($adminPrefix)
 
         // Pages
         Route::get('/pages', PageList::class)->name('pages.index');
+        Route::get('/pages/create', PageEditor::class)->name('pages.create');
         Route::get('/pages/{id}/edit', PageEditor::class)->name('pages.edit');
 
         // Media

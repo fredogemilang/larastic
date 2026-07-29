@@ -1,8 +1,12 @@
 <div>
     @section('title', 'Pages')
 
-    <div style="margin-bottom: 1.5rem;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
         <p style="color: #94a3b8; font-size: 0.875rem; margin: 0;">Manage your static page content and SEO settings.</p>
+        <a href="{{ route('admin.pages.create') }}" style="padding: 0.5rem 1rem; background: linear-gradient(135deg, #6366f1, #8b5cf6); color: white; border: none; border-radius: 0.5rem; font-size: 0.8125rem; font-weight: 600; cursor: pointer; text-decoration: none; display: flex; align-items: center; gap: 0.375rem; white-space: nowrap;">
+            <span class="material-symbols-outlined" style="font-size: 1.125rem;">add</span>
+            Add New Page
+        </a>
     </div>
 
     <div class="card" style="padding: 0; overflow: hidden;">
@@ -41,11 +45,13 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="4" style="padding: 3rem; text-align: center; color: #64748b;">No pages configured yet. Run the page seeder to create default pages.</td>
+                    <td colspan="4" style="padding: 3rem; text-align: center; color: #64748b;">
+                        No pages yet.
+                        <a href="{{ route('admin.pages.create') }}" style="color: #6366f1; text-decoration: none; font-weight: 500;">Create your first page</a>
+                    </td>
                 </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
 </div>
-

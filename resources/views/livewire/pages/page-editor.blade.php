@@ -1,5 +1,5 @@
 <div>
-    @section('title', 'Edit: ' . $title)
+    @section('title', $isCreatePage ? 'New Page' : 'Edit: ' . $title)
 
     <form wire:submit="save">
         <div style="display: grid; grid-template-columns: 1fr 340px; gap: 1.5rem;">
@@ -158,6 +158,26 @@
             <div>
                 <div class="card" style="margin-bottom: 1rem;">
                     <h3 style="font-size: 0.9375rem; font-weight: 600; color: #f1f5f9; margin: 0 0 1rem;">Page Settings</h3>
+
+                    {{-- Template selector --}}
+                    <div style="margin-bottom: 1rem;">
+                        <label style="font-size: 0.8125rem; color: #94a3b8; font-weight: 500; display: block; margin-bottom: 0.375rem;">Template</label>
+                        @if($isCreatePage)
+                            <select wire:model.live="template" style="width: 100%; padding: 0.625rem; background: #0f172a; border: 1px solid rgba(148,163,184,0.2); border-radius: 0.5rem; color: #f1f5f9; font-size: 0.875rem;">
+                                <option value="default">Default</option>
+                                <option value="home">Home</option>
+                                <option value="about">About</option>
+                                <option value="contact">Contact</option>
+                                <option value="services">Services</option>
+                                <option value="career">Career</option>
+                            </select>
+                        @else
+                            <div style="padding: 0.625rem; background: rgba(15,23,42,0.4); border: 1px solid rgba(148,163,184,0.1); border-radius: 0.5rem; color: #94a3b8; font-size: 0.875rem;">
+                                <span style="padding: 0.25rem 0.5rem; background: rgba(99,102,241,0.1); color: #a5b4fc; border-radius: 0.25rem; font-size: 0.8125rem;">{{ $template }}</span>
+                            </div>
+                        @endif
+                    </div>
+
                     <div style="margin-bottom: 1rem;">
                         <label style="font-size: 0.8125rem; color: #94a3b8; font-weight: 500; display: block; margin-bottom: 0.375rem;">Status</label>
                         <select wire:model="status" style="width: 100%; padding: 0.625rem; background: #0f172a; border: 1px solid rgba(148,163,184,0.2); border-radius: 0.5rem; color: #f1f5f9; font-size: 0.875rem;">
@@ -173,7 +193,7 @@
                             </svg>
                         </span>
                         <span wire:loading wire:loading.remove>Saving...</span>
-                        <span wire:loading.remove wire:loading.class="hidden">Save Page</span>
+                        <span wire:loading.remove wire:loading.class="hidden">{{ $isCreatePage ? 'Create Page' : 'Save Page' }}</span>
                     </button>
                 </div>
 
@@ -181,49 +201,61 @@
                 <div class="card" style="margin-bottom: 1rem;">
                     <h3 style="font-size: 0.9375rem; font-weight: 600; color: #f1f5f9; margin: 0 0 0.75rem; display: flex; align-items: center; gap: 0.375rem;"><span class="material-symbols-outlined" style="font-size: 1.125rem; color: #38bdf8;">translate</span> Language</h3>
 
-                    {{-- Current locale badge (read-only) --}}
-                    @php $currentLocaleInfo = $locales[$locale] ?? ['flag' => '🏳️', 'name' => strtoupper($locale)]; @endphp
-                    <div style="padding: 0.625rem; background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.15); border-radius: 0.5rem; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
-                        <span style="font-size: 1.25rem;">{{ $currentLocaleInfo['flag'] }}</span>
-                        <span style="color: #7dd3fc; font-weight: 600; font-size: 0.875rem;">{{ $currentLocaleInfo['name'] }}</span>
-                        <span style="margin-left: auto; font-size: 0.6875rem; color: #64748b; text-transform: uppercase; font-weight: 700; background: rgba(56,189,248,0.15); padding: 0.125rem 0.375rem; border-radius: 0.25rem;">{{ $locale }}</span>
-                    </div>
-
-                    {{-- Linked translations --}}
-                    @php $translations = $this->translations; @endphp
-                    @if(count($translations) > 0)
-                    <div style="margin-bottom: 0.75rem;">
-                        <div style="font-size: 0.75rem; color: #94a3b8; margin-bottom: 0.375rem; font-weight: 500;">Linked Translations</div>
-                        @foreach($translations as $tr)
-                        <a href="{{ route('admin.pages.edit', $tr['id']) }}"
-                            style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.15); border-radius: 0.375rem; color: #7dd3fc; font-size: 0.8125rem; text-decoration: none; margin-bottom: 0.375rem; transition: background 0.15s;"
-                            onmouseover="this.style.background='rgba(56,189,248,0.15)'" onmouseout="this.style.background='rgba(56,189,248,0.08)'">
-                            <span style="font-weight: 600; text-transform: uppercase; font-size: 0.6875rem; background: rgba(56,189,248,0.2); padding: 0.125rem 0.375rem; border-radius: 0.25rem;">{{ $tr['locale'] }}</span>
-                            <span style="flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $tr['title'] }}</span>
-                            <span style="font-size: 0.6875rem; color: {{ $tr['status'] === 'published' ? '#34d399' : '#94a3b8' }};">{{ $tr['status'] }}</span>
-                        </a>
-                        @endforeach
-                    </div>
-                    @endif
-
-                    {{-- Create translation button --}}
-                    @php
-                        $otherLocale = $locale === 'id' ? 'en' : 'id';
-                        $otherLocaleInfo = $locales[$otherLocale] ?? ['name' => strtoupper($otherLocale)];
-                        $hasOtherTranslation = collect($translations)->where('locale', $otherLocale)->isNotEmpty();
-                    @endphp
-                    @if(!$hasOtherTranslation)
-                    <div style="{{ count($translations) > 0 ? 'border-top: 1px solid rgba(148,163,184,0.1); padding-top: 0.75rem;' : '' }}">
-                        <button type="button" wire:click="createTranslation('{{ $otherLocale }}')"
-                            style="width: 100%; padding: 0.5rem; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.2); color: #7dd3fc; border-radius: 0.375rem; font-size: 0.8125rem; cursor: pointer; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 0.375rem;"
-                            wire:loading.attr="disabled">
-                            <span class="material-symbols-outlined" style="font-size: 0.875rem;">add</span>
-                            Create {{ $otherLocaleInfo['name'] }} Version
-                        </button>
-                        <div style="font-size: 0.6875rem; color: #64748b; margin-top: 0.375rem; text-align: center;">
-                            Creates a new page linked as translation
+                    @if($isCreatePage)
+                        {{-- Locale selector for new pages --}}
+                        <select wire:model="locale" style="width: 100%; padding: 0.625rem; background: #0f172a; border: 1px solid rgba(148,163,184,0.2); border-radius: 0.5rem; color: #f1f5f9; font-size: 0.875rem;">
+                            @foreach($locales as $code => $info)
+                                <option value="{{ $code }}">{{ $info['flag'] ?? '' }} {{ $info['name'] }} ({{ strtoupper($code) }})</option>
+                            @endforeach
+                        </select>
+                        <div style="font-size: 0.6875rem; color: #64748b; margin-top: 0.375rem;">
+                            Select the language for this page. You can create a translation after saving.
                         </div>
-                    </div>
+                    @else
+                        {{-- Current locale badge (read-only) --}}
+                        @php $currentLocaleInfo = $locales[$locale] ?? ['flag' => '🏳️', 'name' => strtoupper($locale)]; @endphp
+                        <div style="padding: 0.625rem; background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.15); border-radius: 0.5rem; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.75rem;">
+                            <span style="font-size: 1.25rem;">{{ $currentLocaleInfo['flag'] }}</span>
+                            <span style="color: #7dd3fc; font-weight: 600; font-size: 0.875rem;">{{ $currentLocaleInfo['name'] }}</span>
+                            <span style="margin-left: auto; font-size: 0.6875rem; color: #64748b; text-transform: uppercase; font-weight: 700; background: rgba(56,189,248,0.15); padding: 0.125rem 0.375rem; border-radius: 0.25rem;">{{ $locale }}</span>
+                        </div>
+
+                        {{-- Linked translations --}}
+                        @php $translations = $this->translations; @endphp
+                        @if(count($translations) > 0)
+                        <div style="margin-bottom: 0.75rem;">
+                            <div style="font-size: 0.75rem; color: #94a3b8; margin-bottom: 0.375rem; font-weight: 500;">Linked Translations</div>
+                            @foreach($translations as $tr)
+                            <a href="{{ route('admin.pages.edit', $tr['id']) }}"
+                                style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem; background: rgba(56,189,248,0.08); border: 1px solid rgba(56,189,248,0.15); border-radius: 0.375rem; color: #7dd3fc; font-size: 0.8125rem; text-decoration: none; margin-bottom: 0.375rem; transition: background 0.15s;"
+                                onmouseover="this.style.background='rgba(56,189,248,0.15)'" onmouseout="this.style.background='rgba(56,189,248,0.08)'">
+                                <span style="font-weight: 600; text-transform: uppercase; font-size: 0.6875rem; background: rgba(56,189,248,0.2); padding: 0.125rem 0.375rem; border-radius: 0.25rem;">{{ $tr['locale'] }}</span>
+                                <span style="flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ $tr['title'] }}</span>
+                                <span style="font-size: 0.6875rem; color: {{ $tr['status'] === 'published' ? '#34d399' : '#94a3b8' }};">{{ $tr['status'] }}</span>
+                            </a>
+                            @endforeach
+                        </div>
+                        @endif
+
+                        {{-- Create translation button --}}
+                        @php
+                            $otherLocale = $locale === 'id' ? 'en' : 'id';
+                            $otherLocaleInfo = $locales[$otherLocale] ?? ['name' => strtoupper($otherLocale)];
+                            $hasOtherTranslation = collect($translations)->where('locale', $otherLocale)->isNotEmpty();
+                        @endphp
+                        @if(!$hasOtherTranslation)
+                        <div style="{{ count($translations) > 0 ? 'border-top: 1px solid rgba(148,163,184,0.1); padding-top: 0.75rem;' : '' }}">
+                            <button type="button" wire:click="createTranslation('{{ $otherLocale }}')"
+                                style="width: 100%; padding: 0.5rem; background: rgba(56,189,248,0.1); border: 1px solid rgba(56,189,248,0.2); color: #7dd3fc; border-radius: 0.375rem; font-size: 0.8125rem; cursor: pointer; font-weight: 500; display: flex; align-items: center; justify-content: center; gap: 0.375rem;"
+                                wire:loading.attr="disabled">
+                                <span class="material-symbols-outlined" style="font-size: 0.875rem;">add</span>
+                                Create {{ $otherLocaleInfo['name'] }} Version
+                            </button>
+                            <div style="font-size: 0.6875rem; color: #64748b; margin-top: 0.375rem; text-align: center;">
+                                Creates a new page linked as translation
+                            </div>
+                        </div>
+                        @endif
                     @endif
                 </div>
 
