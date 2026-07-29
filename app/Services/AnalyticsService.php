@@ -16,7 +16,7 @@ class AnalyticsService
         $gaId = preg_replace('/[^a-zA-Z0-9]/', '', Setting::get('ga_id') ?? '');
         $clarityId = preg_replace('/[^a-zA-Z0-9]/', '', Setting::get('clarity_id') ?? '');
 
-        $ahrefsKey = preg_replace('/[^a-zA-Z0-9]/', '', Setting::get('ahrefs_key') ?? '');
+        $ahrefsKey = preg_replace('/[^a-zA-Z0-9+\/=]/', '', Setting::get('ahrefs_key') ?? '');
 
         // IMPORTANT: No leading whitespace on lines! HtmlMin strips leading
         // spaces from script content during export, which would cause a SHA-256

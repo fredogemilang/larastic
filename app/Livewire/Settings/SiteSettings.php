@@ -101,7 +101,7 @@ class SiteSettings extends Component
             'ga_id' => 'nullable|string|max:50|regex:/^[a-zA-Z0-9\-]*$/',
             'clarity_id' => 'nullable|string|max:50|regex:/^[a-zA-Z0-9]*$/',
 
-            'ahrefs_key' => 'nullable|string|max:100|regex:/^[a-zA-Z0-9]*$/',
+            'ahrefs_key' => 'nullable|string|max:100|regex:/^[a-zA-Z0-9+\/=]*$/',
         ]);
 
         Setting::set('gtm_id', $this->gtm_id, 'analytics');
