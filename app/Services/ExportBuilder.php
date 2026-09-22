@@ -9,9 +9,9 @@ use App\Models\Setting;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\View;
 use ZipArchive;
 use voku\helper\HtmlMin;
-use MatthiasMullie\Minify\CSS;
 use MatthiasMullie\Minify\JS;
 
 class ExportBuilder
@@ -62,7 +62,8 @@ class ExportBuilder
                 throw new \Exception("Failed to create build directory: {$this->buildPath}. Check disk space and permissions.");
             }
 
-            // 2. Render all content
+            // 2. Render all content (with the theme CSS placeholder instead of a <link>)
+            View::share('inlineThemeCss', true);
             $manifest = $this->renderer->renderAll(includeDrafts: false);
 
             // 3. Run CSP validation
@@ -105,21 +106,23 @@ class ExportBuilder
                 // Rewrite all CMS domain URLs to production site URL
                 $html = $this->rewriteUrls($html, $appUrl, $siteUrl);
                 
-                // Minify HTML if it's an HTML file
+                // Minify HTML if it's an HTML file, then inline the theme CSS.
+                // Injected after minification so the bytes match the CSP hash exactly.
                 if (str_ends_with($filePath, '.html')) {
-                    $html = $htmlMin->minify($html);
+                    $html = ThemeAssets::injectInlineCss($htmlMin->minify($html));
                 }
-                
+
                 File::put($filePath, $html);
             }
 
-            // 5. Copy public assets (CSS, JS, images)
+            // 5. Copy public assets (CSS, JS, fonts, images)
             $this->copyAssets();
 
             // 6. Copy media files
             $this->copyMedia();
 
-            // 7. (Analytics loader is now inline in base.blade.php)
+            // 7. firebase.json at the build root (headers + CSP hashes)
+            FirebaseHostingConfig::write($this->buildPath);
 
             // 8. Create ZIP
             $zipPath = $this->createZip($export);
@@ -190,7 +193,12 @@ class ExportBuilder
             File::ensureDirectoryExists($this->buildPath);
             $this->extractFromZip(Storage::path($baseExport->output_path), $this->buildPath);
 
+            // Unchanged pages carry the theme CSS of the base export; bring them
+            // in line with the current theme so a single CSP style hash covers all.
+            $this->refreshInlineThemeCss();
+
             // 3. Render only the changed items
+            View::share('inlineThemeCss', true);
             $renderedItems = $this->renderSpecificItems($changedItems);
 
             // 4. Run CSP validation on changed items only
@@ -228,22 +236,26 @@ class ExportBuilder
                 $html = $this->rewriteUrls($html, $appUrl, $siteUrl);
 
                 if (str_ends_with($filePath, '.html')) {
-                    $html = $htmlMin->minify($html);
+                    $html = ThemeAssets::injectInlineCss($htmlMin->minify($html));
                 }
 
                 File::put($filePath, $html);
             }
 
-            // 6. Copy all media (always full copy for simplicity)
+            // 6. Copy theme assets and all media (always full copy for simplicity)
+            $this->copyAssets();
             $this->copyMedia();
 
-            // 7. Create ZIP
+            // 7. firebase.json at the build root (headers + CSP hashes)
+            FirebaseHostingConfig::write($this->buildPath);
+
+            // 8. Create ZIP
             $zipPath = $this->createZip($export);
 
-            // 8. Cleanup build directory
+            // 9. Cleanup build directory
             File::deleteDirectory($this->buildPath);
 
-            // 9. Update export record
+            // 10. Update export record
             $export->update([
                 'status' => 'completed',
                 'output_path' => $zipPath,
@@ -441,17 +453,16 @@ class ExportBuilder
 
     protected function copyAssets(): void
     {
-        // Copy and Minify theme CSS
-        $themeCssSource = resource_path('views/static/assets/theme.css');
+        // Theme CSS is inlined into every page, but the file is still shipped for
+        // pages of older exports that link to it (partial exports on an old base).
         $themeCssDest = $this->buildPath . '/assets/css/theme.css';
         File::ensureDirectoryExists(dirname($themeCssDest));
-        if (File::exists($themeCssSource)) {
-            $cssMinifier = new CSS($themeCssSource);
-            $cssMinifier->minify($themeCssDest);
+        if (ThemeAssets::inlineCss() !== '') {
+            File::put($themeCssDest, ThemeAssets::inlineCss());
         }
 
         // Copy and Minify main.js
-        $mainJsSource = resource_path('views/static/assets/main.js');
+        $mainJsSource = ThemeAssets::path('main.js');
         $jsDir = $this->buildPath . '/assets/js';
         File::ensureDirectoryExists($jsDir);
         if (File::exists($mainJsSource)) {
@@ -461,10 +472,36 @@ class ExportBuilder
 
         // No longer generating analytics-loader.js as it is now inline
 
+        // Self-hosted fonts
+        $fontSource = ThemeAssets::path('fonts');
+        if (File::exists($fontSource)) {
+            File::copyDirectory($fontSource, $this->buildPath . '/assets/fonts');
+        }
+
         // Copy template images
-        $imgSource = resource_path('views/static/assets/img');
+        $imgSource = ThemeAssets::path('img');
         if (File::exists($imgSource)) {
             File::copyDirectory($imgSource, $this->buildPath . '/assets/img');
+        }
+    }
+
+    /**
+     * Re-inline the current theme CSS into every HTML file of the build
+     * (used by partial exports, whose unchanged pages come from an older ZIP).
+     */
+    protected function refreshInlineThemeCss(): void
+    {
+        foreach (File::allFiles($this->buildPath) as $file) {
+            if ($file->getExtension() !== 'html') {
+                continue;
+            }
+
+            $html = File::get($file->getPathname());
+            $updated = ThemeAssets::injectInlineCss($html);
+
+            if ($updated !== $html) {
+                File::put($file->getPathname(), $updated);
+            }
         }
     }
 

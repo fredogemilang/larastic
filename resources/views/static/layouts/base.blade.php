@@ -106,12 +106,14 @@
     <meta property="twitter:image" content="{{ str_starts_with($seoImage, '/') ? $seoImage : '/' . $seoImage }}" />
     @endif
     <link rel="alternate" type="application/rss+xml" title="{{ $siteName }} RSS" href="/rss.xml">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="preload" as="style" href="/assets/css/theme.css?v={{ $assetVersion }}">
+    {{-- Inter is self-hosted (@font-face lives in theme.css); preload the latin subset every page needs --}}
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin>
+    @if(!empty($inlineThemeCss))
+    {{-- Exports inline theme.css here: ExportBuilder fills the placeholder after HTML minification --}}
+    <style id="theme-css"></style>
+    @else
     <link rel="stylesheet" href="/assets/css/theme.css?v={{ $assetVersion }}">
+    @endif
     @yield('head')
 </head>
 <body class="bg-white text-gray-800">

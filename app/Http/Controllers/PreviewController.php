@@ -253,6 +253,18 @@ class PreviewController extends Controller
         abort(404);
     }
 
+    public function assetFont($file)
+    {
+        $path = resource_path('views/static/assets/fonts/' . basename($file));
+        if (str_ends_with($file, '.woff2') && File::exists($path)) {
+            return response()->file($path, [
+                'Content-Type' => 'font/woff2',
+                'Cache-Control' => 'public, max-age=31536000, immutable',
+            ]);
+        }
+        abort(404);
+    }
+
     public function assetImg($path)
     {
         // Sanitize: remove directory traversal attempts

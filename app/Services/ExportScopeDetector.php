@@ -48,6 +48,11 @@ class ExportScopeDetector
             $result['force_full_reasons'][] = 'Site settings have been modified (analytics, general, or social).';
         }
 
+        // 1b. Theme files (CSS/JS/fonts/images) deployed after the last export
+        if (ThemeAssets::lastModified() > $since->getTimestamp()) {
+            $result['force_full_reasons'][] = 'Theme assets (CSS, JS, fonts, or images) have changed since the last export.';
+        }
+
         // 2. Get all content revisions since last export
         $revisions = ContentRevision::where('created_at', '>', $since)
             ->orderByDesc('created_at')

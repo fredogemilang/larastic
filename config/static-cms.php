@@ -48,6 +48,9 @@ return [
     'csp' => [
         'mode' => env('CMS_CSP_MODE', 'warning'), // 'strict' or 'warning'
 
+        // Reference policy for the validator. The header actually served is built
+        // by App\Services\FirebaseHostingConfig, which adds the sha256 hashes of the
+        // two inline elements every page carries (analytics <script>, theme <style>).
         'base_policy' => [
             'default-src' => "'self'",
             'script-src'  => "'self'",

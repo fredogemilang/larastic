@@ -8,6 +8,7 @@ if (app()->environment('local', 'development')) {
     // Assets
     Route::get('/assets/css/{file}', [PreviewController::class, 'assetCss']);
     Route::get('/assets/js/{file}', [PreviewController::class, 'assetJs']);
+    Route::get('/assets/fonts/{file}', [PreviewController::class, 'assetFont']);
     Route::get('/assets/img/{path}', [PreviewController::class, 'assetImg'])->where('path', '.*');
     Route::get('/assets/media/{path}', [PreviewController::class, 'assetMediaCatchAll'])->where('path', '.*');
 

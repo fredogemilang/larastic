@@ -254,82 +254,14 @@ class GitDeployService
     }
 
     /**
-     * Generate firebase.json with the latest CSP hash from AnalyticsService.
+     * Regenerate firebase.json in the repo with the current CSP hashes.
+     * The export ZIP already ships one, but the deploy repo is the source of truth.
      */
     protected function generateFirebaseJson(): void
     {
-        $siteId = Setting::get('firebase_site_id', 'defenxor-com');
-        $cspHash = AnalyticsService::getHash();
+        FirebaseHostingConfig::write($this->repoDir);
 
-        $config = [
-            'hosting' => [
-                'site' => $siteId,
-                'public' => '.',
-                'ignore' => [
-                    'firebase.json',
-                    '.firebase',
-                ],
-                'headers' => [
-                    // Security headers for all resources
-                    [
-                        'source' => '**',
-                        'headers' => [
-                            ['key' => 'X-Frame-Options', 'value' => 'SAMEORIGIN'],
-                            ['key' => 'X-Content-Type-Options', 'value' => 'nosniff'],
-                            ['key' => 'X-XSS-Protection', 'value' => '1; mode=block'],
-                            ['key' => 'Referrer-Policy', 'value' => 'strict-origin-when-cross-origin'],
-                            ['key' => 'Strict-Transport-Security', 'value' => 'max-age=63072000; includeSubDomains; preload'],
-                            [
-                                'key' => 'Content-Security-Policy',
-                                'value' => "default-src 'self'; script-src '{$cspHash}' 'strict-dynamic' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://analytics.ahrefs.com https://static.cloudflareinsights.com https://challenges.cloudflare.com https://ajax.cloudflare.com https: http:; style-src 'self' https://fonts.googleapis.com; font-src 'self' data: https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.google-analytics.com https://*.analytics.google.com https://*.googletagmanager.com https://*.clarity.ms https://analytics.ahrefs.com https://cloudflareinsights.com; object-src 'none'; base-uri 'self'; frame-ancestors 'none'; frame-src 'self' https://challenges.cloudflare.com; upgrade-insecure-requests;",
-                            ],
-                        ],
-                    ],
-                    // HTML pages: no cache so content updates propagate immediately
-                    [
-                        'source' => '**/*.html',
-                        'headers' => [
-                            ['key' => 'Cache-Control', 'value' => 'no-cache'],
-                        ],
-                    ],
-                    // Images: long cache (1 year, immutable)
-                    [
-                        'source' => '**/*.@(webp|png|jpg|jpeg|gif|svg|ico|avif)',
-                        'headers' => [
-                            ['key' => 'Cache-Control', 'value' => 'public, max-age=31536000, immutable'],
-                        ],
-                    ],
-                    // CSS & JS: long cache (1 year, immutable)
-                    [
-                        'source' => '**/*.@(css|js)',
-                        'headers' => [
-                            ['key' => 'Cache-Control', 'value' => 'public, max-age=31536000, immutable'],
-                        ],
-                    ],
-                    // Fonts: long cache (1 year, immutable)
-                    [
-                        'source' => '**/*.@(woff|woff2|ttf|otf|eot)',
-                        'headers' => [
-                            ['key' => 'Cache-Control', 'value' => 'public, max-age=31536000, immutable'],
-                        ],
-                    ],
-                    // XML/JSON/TXT sitemaps & manifests: short cache (1 hour)
-                    [
-                        'source' => '**/*.@(xml|json|txt)',
-                        'headers' => [
-                            ['key' => 'Cache-Control', 'value' => 'public, max-age=3600'],
-                        ],
-                    ],
-                ],
-            ],
-        ];
-
-        File::put(
-            $this->repoDir . '/firebase.json',
-            json_encode($config, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
-        );
-
-        Log::info("GitDeploy: Generated firebase.json with CSP hash {$cspHash}");
+        Log::info('GitDeploy: Generated firebase.json with CSP hashes script=' . AnalyticsService::getHash() . ' style=' . ThemeAssets::inlineCssHash());
     }
 
     /**
