@@ -380,7 +380,7 @@ Header set Content-Security-Policy "default-src 'self'; script-src '{{ $cspHash 
                                 </span>
                                 <span wire:loading wire:target="deployToGithub({{ $export->id }})">
                                     <span class="material-symbols-outlined" style="font-size: 0.875rem; animation: spin 2s linear infinite;">pending</span>
-                                    Deploying...
+                                    Deploying... don't leave this page
                                 </span>
                             </button>
                             @endif

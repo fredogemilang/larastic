@@ -46,6 +46,16 @@ class ExportManager extends Component
                 ]);
                 Log::warning("Export #{$export->id} auto-failed: stuck in '{$export->getOriginal('status')}' status for over 10 minutes.");
             });
+
+        // Auto-fail stuck deploys. The deploy runs inside the Livewire request, so a
+        // page reload or navigation aborts it and LiteSpeed kills the PHP process
+        // before the catch block can update the status. Show "Retry" instead.
+        Export::where('deploy_status', 'deploying')
+            ->where('updated_at', '<', now()->subMinutes(5))
+            ->each(function (Export $export) {
+                $export->update(['deploy_status' => 'failed']);
+                Log::warning("Export #{$export->id} deploy auto-failed: stuck in 'deploying' for over 5 minutes (request aborted?).");
+            });
     }
 
     /**
@@ -311,6 +321,10 @@ class ExportManager extends Component
 
         $this->isDeploying = true;
         $export->update(['deploy_status' => 'deploying']);
+
+        // Keep going if the browser disconnects mid-deploy (clone + push + PR can take a minute)
+        @ignore_user_abort(true);
+        @set_time_limit(300);
 
         try {
             $service = app(GitDeployService::class);
