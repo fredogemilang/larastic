@@ -5,18 +5,20 @@
 @endphp
 
 <div class="w-full bg-white text-gray-800">
-    <!-- Top Title & Subtitle Breadcrumb -->
-    <div class="max-w-[1140px] mx-auto px-4 text-center pt-8 pb-4">
-        <h1 class="text-2xl md:text-3xl font-normal text-slate-800 mb-1">
-            {{ $isEn ? 'Managed Security Service Provider (MSSP) 24/7 SOC | Defenxor DIMS' : 'Managed Security Service Provider (MSSP) 24/7 SOC I Defenxor DIMS' }}
-        </h1>
-        <p class="text-sm md:text-base text-slate-500 font-normal">
-            Managed Security Service Provider (MSSP)
-        </p>
+    <!-- Top Title & Subtitle Breadcrumb (Soft Gray Background) -->
+    <div class="w-full py-8 md:py-10 text-center border-b border-slate-200/60" style="background-color: #f8fafc;">
+        <div class="max-w-[1140px] mx-auto px-4">
+            <h1 class="text-2xl md:text-3xl font-normal text-slate-800 mb-1.5">
+                {{ $isEn ? 'Managed Security Service Provider (MSSP) 24/7 SOC | Defenxor DIMS' : 'Managed Security Service Provider (MSSP) 24/7 SOC I Defenxor DIMS' }}
+            </h1>
+            <p class="text-sm md:text-base text-slate-500 font-normal">
+                Managed Security Service Provider (MSSP)
+            </p>
+        </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="pt-6 pb-12">
+    <!-- Hero Section (Plain White Background) -->
+    <section class="py-12 md:py-16 bg-white">
         <div class="max-w-[1140px] mx-auto px-4 text-center">
             <h2 class="text-2xl md:text-3xl lg:text-[34px] font-semibold text-slate-900 leading-snug mb-4">
                 Managed Security Service Provider (MSSP) 24/7 SOC<br>
@@ -110,27 +112,27 @@
 
     <!-- Section: MEMBANDINGKAN IN-HOUSE SOC VS MANAGED SOC -->
     <section class="py-16" style="background-color: #f8fafc;">
-        <div class="max-w-[1000px] mx-auto px-4">
+        <div class="max-w-[720px] mx-auto px-4">
             <h2 class="text-xl md:text-2xl font-light text-center uppercase tracking-[0.2em] text-slate-800 mb-10">
                 {{ $isEn ? 'COMPARING IN-HOUSE SOC VS MANAGED SOC' : 'MEMBANDINGKAN IN-HOUSE SOC VS MANAGED SOC' }}
             </h2>
 
             <div class="overflow-x-auto shadow-sm rounded-xl">
-                <table class="w-full text-left border-collapse" style="min-width: 620px;">
+                <table class="w-full text-left border-collapse" style="min-width: 580px;">
                     <thead>
                         <tr>
-                            <th style="width: 25%; padding: 16px;"></th>
-                            <th style="width: 37.5%; padding: 14px 20px; text-align: center; font-weight: 700; font-size: 15px; color: #1e293b; background-color: #cbd5e1; border-top-left-radius: 8px;">
+                            <th style="width: 24%; padding: 14px 16px;"></th>
+                            <th style="width: 38%; padding: 14px 20px; text-align: center; font-weight: 700; font-size: 15px; color: #1e293b; background-color: #cbd5e1; border-top-left-radius: 8px;">
                                 In-house SOC
                             </th>
-                            <th style="width: 37.5%; padding: 14px 20px; text-align: center; font-weight: 700; font-size: 15px; color: #ffffff; background-color: #162647; border-top-right-radius: 8px;">
+                            <th style="width: 38%; padding: 14px 20px; text-align: center; font-weight: 700; font-size: 15px; color: #ffffff; background-color: #162647; border-top-right-radius: 8px;">
                                 DIMS
                             </th>
                         </tr>
                     </thead>
                     <tbody style="font-size: 14px;">
                         <tr>
-                            <td style="padding: 16px 20px; font-weight: 700; color: #0f172a; background-color: transparent;">
+                            <td style="padding: 16px 16px; font-weight: 700; color: #0f172a; background-color: transparent; border-bottom: 1px solid #e2e8f0;">
                                 {{ $isEn ? 'Operations' : 'Operasional' }}
                             </td>
                             <td style="padding: 16px 20px; text-align: center; color: #334155; background-color: #f1f2f4; border-bottom: 1px solid #e2e8f0;">
@@ -141,7 +143,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="padding: 16px 20px; font-weight: 700; color: #0f172a; background-color: transparent;">
+                            <td style="padding: 16px 16px; font-weight: 700; color: #0f172a; background-color: transparent; border-bottom: 1px solid #e2e8f0;">
                                 Security Talent
                             </td>
                             <td style="padding: 16px 20px; text-align: center; color: #334155; background-color: #f1f2f4; border-bottom: 1px solid #e2e8f0;">
@@ -152,7 +154,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="padding: 16px 20px; font-weight: 700; color: #0f172a; background-color: transparent;">
+                            <td style="padding: 16px 16px; font-weight: 700; color: #0f172a; background-color: transparent; border-bottom: 1px solid #e2e8f0;">
                                 Security Technology
                             </td>
                             <td style="padding: 16px 20px; text-align: center; color: #334155; background-color: #f1f2f4; border-bottom: 1px solid #e2e8f0;">
@@ -163,7 +165,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="padding: 16px 20px; font-weight: 700; color: #0f172a; background-color: transparent;">
+                            <td style="padding: 16px 16px; font-weight: 700; color: #0f172a; background-color: transparent;">
                                 Incident Response
                             </td>
                             <td style="padding: 16px 20px; text-align: center; color: #334155; background-color: #f1f2f4; border-bottom-left-radius: 8px;">
@@ -256,28 +258,30 @@
         </div>
     </section>
 
-    <!-- Section: Belum Siap Membangun SOC Sendiri? (CTA Banner) -->
-    <section class="py-16 border-t border-slate-200" style="background: linear-gradient(105deg, #f8f9fa 0%, #eaedf1 50%, #d5dbe2 100%);">
-        <div class="max-w-[1140px] mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-8 items-center">
-                <!-- Left: Text & Button -->
-                <div class="text-left">
-                    <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
-                        {{ $isEn ? 'Not Ready to Build Your Own SOC?' : 'Belum Siap Membangun SOC Sendiri?' }}
-                    </h2>
-                    <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6 max-w-lg">
-                        {{ $isEn ? 'Gain 24/7 SOC capabilities without increasing team complexity, technology overhead, and operational costs.' : 'Dapatkan kapabilitas SOC 24/7 tanpa harus menambah kompleksitas tim, teknologi, dan biaya operasional.' }}
-                    </p>
-                    <div>
-                        <a href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=pmuMKTp9uEuBlt-qXfsxv71xA9X3CdBLgmi2RkLAy_ZUM045QlUzSDJGTzRRNzNSWlcxSVBXUkVVWS4u&route=shorturl" target="_blank" rel="noopener noreferrer" class="inline-block text-white font-semibold text-sm px-6 py-3 rounded shadow-sm transition-opacity hover:opacity-90" style="background-color: #ae3033;">
-                            {{ $isEn ? 'Free SOC Consultation' : 'Konsultasi Kebutuhan SOC Gratis' }}
-                        </a>
+    <!-- Section: Belum Siap Membangun SOC Sendiri? (CTA Banner - Contained Box) -->
+    <section class="py-12 md:py-16 bg-white border-t border-slate-100">
+        <div class="max-w-[1040px] mx-auto px-4">
+            <div class="rounded-2xl md:rounded-3xl p-8 md:p-12 border border-slate-200/80 shadow-xs" style="background: linear-gradient(105deg, #f8f9fa 0%, #eaedf1 50%, #d5dbe2 100%);">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <!-- Left: Text & Button -->
+                    <div class="text-left">
+                        <h2 class="text-2xl md:text-3xl font-bold text-slate-900 mb-3">
+                            {{ $isEn ? 'Not Ready to Build Your Own SOC?' : 'Belum Siap Membangun SOC Sendiri?' }}
+                        </h2>
+                        <p class="text-slate-600 text-sm md:text-base leading-relaxed mb-6 max-w-lg">
+                            {{ $isEn ? 'Gain 24/7 SOC capabilities without increasing team complexity, technology overhead, and operational costs.' : 'Dapatkan kapabilitas SOC 24/7 tanpa harus menambah kompleksitas tim, teknologi, dan biaya operasional.' }}
+                        </p>
+                        <div>
+                            <a href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=pmuMKTp9uEuBlt-qXfsxv71xA9X3CdBLgmi2RkLAy_ZUM045QlUzSDJGTzRRNzNSWlcxSVBXUkVVWS4u&route=shorturl" target="_blank" rel="noopener noreferrer" class="inline-block text-white font-semibold text-sm px-6 py-3 rounded shadow-sm transition-opacity hover:opacity-90" style="background-color: #ae3033;">
+                                {{ $isEn ? 'Free SOC Consultation' : 'Konsultasi Kebutuhan SOC Gratis' }}
+                            </a>
+                        </div>
                     </div>
-                </div>
 
-                <!-- Right: 3D Illustration -->
-                <div class="flex justify-center md:justify-end items-center">
-                    <img src="/assets/img/dims-laptop-soc.webp" alt="SOC Security Operations Center Illustration" class="max-w-[360px] md:max-w-[420px] w-full h-auto object-contain drop-shadow-lg" loading="lazy">
+                    <!-- Right: 3D Illustration -->
+                    <div class="flex justify-center md:justify-end items-center">
+                        <img src="/assets/img/dims-laptop-soc.webp" alt="SOC Security Operations Center Illustration" class="max-w-[360px] md:max-w-[420px] w-full h-auto object-contain drop-shadow-lg" loading="lazy">
+                    </div>
                 </div>
             </div>
         </div>
