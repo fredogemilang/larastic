@@ -85,22 +85,23 @@
     <div class="max-w-[1140px] mx-auto px-4 text-center">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-3xl font-bold mb-6 text-gray-900">{{ $b['siapa_kami']['title'] ?? 'About' }}</h2>
-            <p class="text-gray-600 leading-relaxed {{ (!empty($b['siapa_kami']['cta_text']) || !empty($b['siapa_kami']['button_text'])) ? 'mb-8' : 'mb-12' }}">{{ $b['siapa_kami']['body'] ?? '' }}</p>
+            <p class="text-gray-600 leading-relaxed mb-6">{{ $b['siapa_kami']['body'] ?? '' }}</p>
             @php
                 $btnText = $b['siapa_kami']['cta_text'] ?? ($b['siapa_kami']['button_text'] ?? '');
                 $btnUrl = $b['siapa_kami']['cta_url'] ?? ($b['siapa_kami']['button_url'] ?? '');
+                $videoUrl = $b['siapa_kami']['video'] ?? '';
+                $youtubeId = $b['siapa_kami']['youtube_id'] ?? '';
             @endphp
             @if(!empty($btnText) && !empty($btnUrl))
-            <div class="{{ !empty($b['siapa_kami']['video']) ? 'mb-12' : '' }}">
-                <a href="{{ $btnUrl }}" target="_blank" rel="noopener noreferrer" class="inline-block bg-defenxor-red text-white font-semibold text-base px-8 py-3.5 rounded-lg shadow-md hover:bg-neutral-900 transition-all duration-200 no-underline">
+            <div class="{{ (!empty($videoUrl) || !empty($youtubeId)) ? 'mb-12' : '' }}">
+                <a href="{{ $btnUrl }}" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#ae3033] hover:bg-[#8e2427] text-white font-semibold text-sm px-7 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all duration-200 no-underline tracking-wide">
                     {{ $btnText }}
                 </a>
             </div>
             @endif
         </div>
-        @php $videoUrl = $b['siapa_kami']['video'] ?? ''; @endphp
         @if(!empty($videoUrl))
-        <div class="relative rounded-xl overflow-hidden shadow-2xl aspect-video bg-black group">
+        <div class="relative rounded-xl overflow-hidden shadow-2xl aspect-video bg-black group max-w-4xl mx-auto">
             <video id="siapaKamiVideo" controls preload="metadata" class="absolute inset-0 w-full h-full outline-none z-10" src="{{ $videoUrl }}">
                 Your browser does not support the video tag.
             </video>
@@ -110,6 +111,10 @@
                     <path d="M 45,24 27,14 27,34" fill="#fff"/>
                 </svg>
             </div>
+        </div>
+        @elseif(!empty($youtubeId))
+        <div class="relative rounded-xl overflow-hidden shadow-2xl aspect-video bg-black group max-w-4xl mx-auto">
+            <iframe class="absolute inset-0 w-full h-full" src="https://www.youtube-nocookie.com/embed/{{ $youtubeId }}" title="Defenxor Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         @endif
     </div>

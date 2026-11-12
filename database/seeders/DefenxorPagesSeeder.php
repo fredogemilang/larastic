@@ -39,8 +39,8 @@ class DefenxorPagesSeeder extends Seeder
                         'body' => 'Berbasis di Jakarta, Defenxor menghadirkan DIMS (managed security), DISC (security consulting), dan DISI (security infrastructure integration) untuk membantu organisasi memantau, mengevaluasi, mengintegrasikan, dan memperkuat keamanan infrastruktur IT mereka.',
                         'cta_text' => 'Amankan Bisnis Anda',
                         'cta_url' => 'https://forms.cloud.microsoft/pages/responsepage.aspx?id=pmuMKTp9uEuBlt-qXfsxv71xA9X3CdBLgmi2RkLAy_ZUM045QlUzSDJGTzRRNzNSWlcxSVBXUkVVWS4u&route=shorturl',
-                        'video' => '',
-                        'youtube_id' => '',
+                        'video' => '/storage/media/2026/05/M7jluLTXqf634RZWXgg7jZNMkAahdDFYvEcfBQzc.webm',
+                        'youtube_id' => 'iat5nHMo9t0',
                     ],
                     'why_section' => [
                         'title' => 'Mengapa Defenxor ?',
