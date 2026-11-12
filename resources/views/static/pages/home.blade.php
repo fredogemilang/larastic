@@ -84,8 +84,19 @@
 <section class="py-20 bg-gray-50" data-purpose="about-us">
     <div class="max-w-[1140px] mx-auto px-4 text-center">
         <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold mb-6">{{ $b['siapa_kami']['title'] ?? 'Siapa Kami ?' }}</h2>
-            <p class="text-gray-600 mb-12">{{ $b['siapa_kami']['body'] ?? 'Kami adalah Defender Nusa Semesta (DNS), sebuah bisnis yang berfokus pada keamanan TI.' }}</p>
+            <h2 class="text-3xl font-bold mb-6 text-gray-900">{{ $b['siapa_kami']['title'] ?? 'About' }}</h2>
+            <p class="text-gray-600 leading-relaxed {{ (!empty($b['siapa_kami']['cta_text']) || !empty($b['siapa_kami']['button_text'])) ? 'mb-8' : 'mb-12' }}">{{ $b['siapa_kami']['body'] ?? '' }}</p>
+            @php
+                $btnText = $b['siapa_kami']['cta_text'] ?? ($b['siapa_kami']['button_text'] ?? '');
+                $btnUrl = $b['siapa_kami']['cta_url'] ?? ($b['siapa_kami']['button_url'] ?? '');
+            @endphp
+            @if(!empty($btnText) && !empty($btnUrl))
+            <div class="{{ !empty($b['siapa_kami']['video']) ? 'mb-12' : '' }}">
+                <a href="{{ $btnUrl }}" target="_blank" rel="noopener noreferrer" class="inline-block bg-defenxor-red text-white font-semibold text-base px-8 py-3.5 rounded-lg shadow-md hover:bg-neutral-900 transition-all duration-200 no-underline">
+                    {{ $btnText }}
+                </a>
+            </div>
+            @endif
         </div>
         @php $videoUrl = $b['siapa_kami']['video'] ?? ''; @endphp
         @if(!empty($videoUrl))

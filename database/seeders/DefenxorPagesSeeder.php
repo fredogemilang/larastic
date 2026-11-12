@@ -35,9 +35,12 @@ class DefenxorPagesSeeder extends Seeder
                         ],
                     ],
                     'siapa_kami' => [
-                        'title' => 'Siapa Kami ?',
-                        'body' => 'Kami adalah Defender Nusa Semesta (DNS), sebuah bisnis yang berfokus pada keamanan TI. Kami adalah tim yang menciptakan Defenxor, sebuah penyedia keamanan terintegrasi untuk bisnis.',
-                        'youtube_id' => 'iat5nHMo9t0',
+                        'title' => 'About',
+                        'body' => 'Berbasis di Jakarta, Defenxor menghadirkan DIMS (managed security), DISC (security consulting), dan DISI (security infrastructure integration) untuk membantu organisasi memantau, mengevaluasi, mengintegrasikan, dan memperkuat keamanan infrastruktur IT mereka.',
+                        'cta_text' => 'Amankan Bisnis Anda',
+                        'cta_url' => 'https://forms.cloud.microsoft/pages/responsepage.aspx?id=pmuMKTp9uEuBlt-qXfsxv71xA9X3CdBLgmi2RkLAy_ZUM045QlUzSDJGTzRRNzNSWlcxSVBXUkVVWS4u&route=shorturl',
+                        'video' => '',
+                        'youtube_id' => '',
                     ],
                     'why_section' => [
                         'title' => 'Mengapa Defenxor ?',

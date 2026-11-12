@@ -42,7 +42,7 @@ class PageEditor extends Component
         'home' => [
             'hero' => ['type' => 'object', 'fields' => ['title', 'subtitle']],
             'slides' => ['type' => 'list', 'fields' => ['image', 'title', 'subtitle', 'cta_text', 'cta_url', 'side_image']],
-            'siapa_kami' => ['type' => 'object', 'fields' => ['title', 'body', 'video']],
+            'siapa_kami' => ['type' => 'object', 'fields' => ['title', 'body', 'cta_text', 'cta_url', 'video']],
             'why_section' => ['type' => 'object', 'fields' => ['title', 'subtitle']],
             'features' => ['type' => 'list', 'fields' => ['img', 'title', 'description']],
             'cta' => ['type' => 'object', 'fields' => ['title', 'description']],
