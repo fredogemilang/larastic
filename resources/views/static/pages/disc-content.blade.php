@@ -91,31 +91,11 @@
                         {{ $isEn ? 'WHY DISC?' : 'KENAPA DISC?' }}
                     </h2>
 
-                    <ul class="space-y-4 mb-8" style="margin-bottom: 32px; list-style: none; padding: 0;">
-                        <li class="flex items-start" style="margin-bottom: 14px;">
-                            <span class="text-xl font-bold mr-3 leading-none select-none" style="color: #ae3033; font-size: 20px; line-height: 1; margin-right: 12px;">•</span>
-                            <span class="text-sm md:text-base text-slate-700 font-medium" style="color: #334155; font-size: 15px;">
-                                {{ $isEn ? 'Identify security gaps' : 'Identifikasi security gaps' }}
-                            </span>
-                        </li>
-                        <li class="flex items-start" style="margin-bottom: 14px;">
-                            <span class="text-xl font-bold mr-3 leading-none select-none" style="color: #ae3033; font-size: 20px; line-height: 1; margin-right: 12px;">•</span>
-                            <span class="text-sm md:text-base text-slate-700 font-medium" style="color: #334155; font-size: 15px;">
-                                {{ $isEn ? 'Prioritize critical risks' : 'Prioritaskan risiko kritikal' }}
-                            </span>
-                        </li>
-                        <li class="flex items-start" style="margin-bottom: 14px;">
-                            <span class="text-xl font-bold mr-3 leading-none select-none" style="color: #ae3033; font-size: 20px; line-height: 1; margin-right: 12px;">•</span>
-                            <span class="text-sm md:text-base text-slate-700 font-medium" style="color: #334155; font-size: 15px;">
-                                {{ $isEn ? 'Comply with relevant regulations' : 'Sesuai dengan regulasi yang berlaku' }}
-                            </span>
-                        </li>
-                        <li class="flex items-start">
-                            <span class="text-xl font-bold mr-3 leading-none select-none" style="color: #ae3033; font-size: 20px; line-height: 1; margin-right: 12px;">•</span>
-                            <span class="text-sm md:text-base text-slate-700 font-medium" style="color: #334155; font-size: 15px;">
-                                {{ $isEn ? 'Build a more resilient security posture' : 'Membangun security posture yang lebih andal' }}
-                            </span>
-                        </li>
+                    <ul class="space-y-3 mb-8 text-slate-700 text-sm md:text-[15px]" style="margin-bottom: 32px; list-style: disc; padding-left: 20px; color: #334155; font-size: 15px; line-height: 1.8;">
+                        <li>{{ $isEn ? 'Identify security gaps' : 'Identifikasi security gaps' }}</li>
+                        <li>{{ $isEn ? 'Prioritize critical risks' : 'Prioritaskan risiko kritikal' }}</li>
+                        <li>{{ $isEn ? 'Comply with relevant regulations' : 'Sesuai dengan regulasi yang berlaku' }}</li>
+                        <li>{{ $isEn ? 'Build a more resilient security posture' : 'Membangun security posture yang lebih andal' }}</li>
                     </ul>
 
                     <div>
@@ -141,56 +121,52 @@
                     <div class="space-y-6">
                         <!-- Point 1 -->
                         <div>
-                            <h3 class="font-bold text-slate-900 text-base mb-1 flex items-start" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
-                                <span style="color: #ae3033; margin-right: 8px;">•</span>
-                                {{ $isEn ? 'Discover Vulnerabilities Before They Become Incidents' : 'Temukan Celah Sebelum Menjadi Insiden' }}
+                            <h3 class="font-bold text-slate-900 text-base mb-1" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
+                                • {{ $isEn ? 'Discover Vulnerabilities Before They Become Incidents' : 'Temukan Celah Sebelum Menjadi Insiden' }}
                             </h3>
-                            <p class="text-sm leading-relaxed text-slate-600 mb-1.5" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-bottom: 6px; padding-left: 18px;">
+                            <p class="text-sm leading-relaxed text-slate-600 mb-1.5" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-bottom: 6px; padding-left: 14px;">
                                 {{ $isEn ? 'Evaluate security posture, systems, applications, and configurations to identify vulnerabilities and areas requiring remediation.' : 'Evaluasi security posture, sistem, aplikasi, dan konfigurasi untuk mengidentifikasi vulnerability dan area yang perlu diperbaiki.' }}
                             </p>
-                            <p class="text-xs text-slate-700 font-semibold" style="color: #334155; font-size: 12px; font-weight: 600; padding-left: 18px; margin: 0;">
+                            <p class="text-xs text-slate-700 font-semibold" style="color: #334155; font-size: 12px; font-weight: 600; padding-left: 14px; margin: 0;">
                                 Security Audit • Vulnerability Assessment • Penetration Testing
                             </p>
                         </div>
 
                         <!-- Point 2 -->
                         <div>
-                            <h3 class="font-bold text-slate-900 text-base mb-1 flex items-start" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
-                                <span style="color: #ae3033; margin-right: 8px;">•</span>
-                                {{ $isEn ? 'Comprehensive Security Support' : 'Bantuan Perihal Security' }}
+                            <h3 class="font-bold text-slate-900 text-base mb-1" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
+                                • {{ $isEn ? 'Comprehensive Security Support' : 'Bantuan Perihal Security' }}
                             </h3>
-                            <p class="text-sm leading-relaxed text-slate-600 mb-1.5" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-bottom: 6px; padding-left: 18px;">
+                            <p class="text-sm leading-relaxed text-slate-600 mb-1.5" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-bottom: 6px; padding-left: 14px;">
                                 {{ $isEn ? 'Identify risks, prioritize mitigation efforts, and align security controls with compliance and regulatory demands. DISC also encompasses security policy development and certification support, including PCI-DSS and ISO 27001.' : 'Identifikasi risiko, susun prioritas mitigasi, dan selaraskan kontrol keamanan dengan kebutuhan compliance dan regulasi yang relevan. DISC existing juga mencakup security policy development dan certification support, termasuk PCI-DSS dan ISO 27001.' }}
                             </p>
-                            <p class="text-xs text-slate-700 font-semibold" style="color: #334155; font-size: 12px; font-weight: 600; padding-left: 18px; margin: 0;">
+                            <p class="text-xs text-slate-700 font-semibold" style="color: #334155; font-size: 12px; font-weight: 600; padding-left: 14px; margin: 0;">
                                 Risk Assessment • Security Policy • ISO 27001 • PCI-DSS • {{ $isEn ? 'Personal Data Protection' : 'UU PDP' }}
                             </p>
                         </div>
 
                         <!-- Point 3 -->
                         <div>
-                            <h3 class="font-bold text-slate-900 text-base mb-1 flex items-start" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
-                                <span style="color: #ae3033; margin-right: 8px;">•</span>
-                                {{ $isEn ? 'Integrated Security Architecture' : 'Arsitektur Keamanan Terintegrasi' }}
+                            <h3 class="font-bold text-slate-900 text-base mb-1" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
+                                • {{ $isEn ? 'Integrated Security Architecture' : 'Arsitektur Keamanan Terintegrasi' }}
                             </h3>
-                            <p class="text-sm leading-relaxed text-slate-600 mb-1.5" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-bottom: 6px; padding-left: 18px;">
+                            <p class="text-sm leading-relaxed text-slate-600 mb-1.5" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-bottom: 6px; padding-left: 14px;">
                                 {{ $isEn ? 'Design security architectures that seamlessly integrate technologies, controls, and workflows for end-to-end organizational protection.' : 'Rancang security architecture yang mengintegrasikan teknologi, kontrol, dan proses agar perlindungan lebih menyeluruh sesuai kebutuhan bisnis.' }}
                             </p>
-                            <p class="text-xs text-slate-700 font-semibold" style="color: #334155; font-size: 12px; font-weight: 600; padding-left: 18px; margin: 0;">
+                            <p class="text-xs text-slate-700 font-semibold" style="color: #334155; font-size: 12px; font-weight: 600; padding-left: 14px; margin: 0;">
                                 Architecture Review • Security Strategy • Technology Alignment
                             </p>
                         </div>
 
                         <!-- Point 4 -->
                         <div>
-                            <h3 class="font-bold text-slate-900 text-base mb-1 flex items-start" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
-                                <span style="color: #ae3033; margin-right: 8px;">•</span>
-                                {{ $isEn ? 'Security Advisory & Incident Response' : 'Security Advisory & Incident Response' }}
+                            <h3 class="font-bold text-slate-900 text-base mb-1" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
+                                • {{ $isEn ? 'Security Advisory & Incident Response' : 'Security Advisory & Incident Response' }}
                             </h3>
-                            <p class="text-sm leading-relaxed text-slate-600 mb-1.5" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-bottom: 6px; padding-left: 18px;">
+                            <p class="text-sm leading-relaxed text-slate-600 mb-1.5" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-bottom: 6px; padding-left: 14px;">
                                 {{ $isEn ? 'Receive dedicated expert advisory from cybersecurity consultants along with rapid response support to manage and mitigate incidents.' : 'Dapatkan advisory dari security consultant dan dukungan response untuk menangani serta memitigasi insiden.' }}
                             </p>
-                            <p class="text-xs text-slate-700 font-semibold" style="color: #334155; font-size: 12px; font-weight: 600; padding-left: 18px; margin: 0;">
+                            <p class="text-xs text-slate-700 font-semibold" style="color: #334155; font-size: 12px; font-weight: 600; padding-left: 14px; margin: 0;">
                                 Security Advisory • Incident Response • SOC Advisory
                             </p>
                         </div>
@@ -222,41 +198,37 @@
 
                     <div class="space-y-6">
                         <div>
-                            <h3 class="font-bold text-slate-900 text-base mb-1 flex items-start" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
-                                <span style="color: #ae3033; margin-right: 8px;">•</span>
-                                Discovery & Assessment
+                            <h3 class="font-bold text-slate-900 text-base mb-1" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
+                                • Discovery & Assessment
                             </h3>
-                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 18px;">
+                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 14px;">
                                 {{ $isEn ? 'Map your security landscape by identifying vulnerabilities, exposure points, and security gaps.' : 'Petakan kondisi keamanan dengan mengidentifikasi vulnerability, exposure, dan security gaps.' }}
                             </p>
                         </div>
 
                         <div>
-                            <h3 class="font-bold text-slate-900 text-base mb-1 flex items-start" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
-                                <span style="color: #ae3033; margin-right: 8px;">•</span>
-                                Strategy & Architecture
+                            <h3 class="font-bold text-slate-900 text-base mb-1" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
+                                • Strategy & Architecture
                             </h3>
-                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 18px;">
+                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 14px;">
                                 {{ $isEn ? 'Define and establish security priorities aligned with risk thresholds and organizational business goals.' : 'Bangun dan tentukan prioritas keamanan berdasarkan risiko serta arah kebutuhan bisnis.' }}
                             </p>
                         </div>
 
                         <div>
-                            <h3 class="font-bold text-slate-900 text-base mb-1 flex items-start" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
-                                <span style="color: #ae3033; margin-right: 8px;">•</span>
-                                {{ $isEn ? 'Implementation Roadmap' : 'Roadmap Implementasi' }}
+                            <h3 class="font-bold text-slate-900 text-base mb-1" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
+                                • {{ $isEn ? 'Implementation Roadmap' : 'Roadmap Implementasi' }}
                             </h3>
-                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 18px;">
+                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 14px;">
                                 {{ $isEn ? 'Develop an actionable roadmap enabling internal teams to translate strategic recommendations into tangible results.' : 'Susun roadmap yang dapat digunakan tim internal untuk mengubah rekomendasi menjadi aksi.' }}
                             </p>
                         </div>
 
                         <div>
-                            <h3 class="font-bold text-slate-900 text-base mb-1 flex items-start" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
-                                <span style="color: #ae3033; margin-right: 8px;">•</span>
-                                {{ $isEn ? 'Continuous Review & Advisory' : 'Review & Advisory Berkelanjutan' }}
+                            <h3 class="font-bold text-slate-900 text-base mb-1" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
+                                • {{ $isEn ? 'Continuous Review & Advisory' : 'Review & Advisory Berkelanjutan' }}
                             </h3>
-                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 18px;">
+                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 14px;">
                                 {{ $isEn ? 'Regularly review security postures to ensure sustainable resilience as evolving threat landscapes and business requirements change.' : 'Review security secara berkala untuk memastikan posture terus berkembang sesuai riset dan kebutuhan bisnis.' }}
                             </p>
                         </div>
@@ -278,41 +250,37 @@
 
                     <div class="space-y-6">
                         <div>
-                            <h3 class="font-bold text-slate-900 text-base mb-1 flex items-start" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
-                                <span style="color: #ae3033; margin-right: 8px;">•</span>
-                                {{ $isEn ? 'Certified Security Expert Team' : 'Tim Ahli Keamanan Bersertifikat' }}
+                            <h3 class="font-bold text-slate-900 text-base mb-1" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
+                                • {{ $isEn ? 'Certified Security Expert Team' : 'Tim Ahli Keamanan Bersertifikat' }}
                             </h3>
-                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 18px;">
+                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 14px;">
                                 {{ $isEn ? 'Backed by experienced professionals holding industry-leading certifications including CISSP, CISA, ISO 27001 LA, ISO 20000 LA, OSCP, CEH Master, CHFI, and PCI QSA.' : 'Didukung profesional dengan sertifikasi seperti CISSP, CISA, ISO 27001LA, ISO 20000 LA, OSCP, CEH Master, CHFI dan PCI QSA.' }}
                             </p>
                         </div>
 
                         <div>
-                            <h3 class="font-bold text-slate-900 text-base mb-1 flex items-start" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
-                                <span style="color: #ae3033; margin-right: 8px;">•</span>
-                                {{ $isEn ? 'International Frameworks & Standards' : 'Standar Internasional' }}
+                            <h3 class="font-bold text-slate-900 text-base mb-1" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
+                                • {{ $isEn ? 'International Frameworks & Standards' : 'Standar Internasional' }}
                             </h3>
-                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 18px;">
+                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 14px;">
                                 {{ $isEn ? 'Assessment and testing methodologies strictly adhere to globally recognized frameworks including OWASP, CIS Controls, and NIST.' : 'Pendekatan assessment dan testing mengacu pada framework seperti OWASP, CIS dan NIST.' }}
                             </p>
                         </div>
 
                         <div>
-                            <h3 class="font-bold text-slate-900 text-base mb-1 flex items-start" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
-                                <span style="color: #ae3033; margin-right: 8px;">•</span>
-                                {{ $isEn ? 'Actionable Recommendations' : 'Rekomendasi Dapat Ditindaklanjuti' }}
+                            <h3 class="font-bold text-slate-900 text-base mb-1" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
+                                • {{ $isEn ? 'Actionable Recommendations' : 'Rekomendasi Dapat Ditindaklanjuti' }}
                             </h3>
-                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 18px;">
+                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 14px;">
                                 {{ $isEn ? 'More than just finding vulnerabilities, you receive in-depth analysis, comprehensive risk ratings, and actionable remediation roadmaps.' : 'Anda bukan sekadar menemukan masalah, tetapi juga mendapatkan analisis lengkap, risk rating, dan rekomendasi yang dapat ditindaklanjuti.' }}
                             </p>
                         </div>
 
                         <div>
-                            <h3 class="font-bold text-slate-900 text-base mb-1 flex items-start" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
-                                <span style="color: #ae3033; margin-right: 8px;">•</span>
-                                {{ $isEn ? 'Tailored to Organizational Needs' : 'Sesuai Kebutuhan Organisasi' }}
+                            <h3 class="font-bold text-slate-900 text-base mb-1" style="color: #0f172a; font-size: 15px; font-weight: 700; margin-bottom: 4px;">
+                                • {{ $isEn ? 'Tailored to Organizational Needs' : 'Sesuai Kebutuhan Organisasi' }}
                             </h3>
-                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 18px;">
+                            <p class="text-sm leading-relaxed text-slate-600" style="color: #475569; font-size: 14px; line-height: 1.6; margin: 0; padding-left: 14px;">
                                 {{ $isEn ? 'Consulting engagements are customized to your specific security objectives, compliance requirements, operational scale, and infrastructure realities.' : 'Engagement disesuaikan dengan kebutuhan security, compliance, skala, dan kondisi organisasi.' }}
                             </p>
                         </div>
@@ -329,52 +297,52 @@
 
     <!-- Section: Frequently Asked Question (FAQ) -->
     <section class="py-16 bg-white" style="background-color: #ffffff; padding: 48px 16px 64px 16px;">
-        <div class="max-w-[1140px] mx-auto" style="max-width: 1140px; margin: 0 auto;">
+        <div style="max-width: 960px; margin: 0 auto;">
             <h2 class="text-2xl md:text-3xl font-light text-center text-slate-800 mb-12" style="color: #1e293b; font-size: 26px; font-weight: 400; text-align: center; margin-bottom: 40px;">
                 Frequently Asked Question
             </h2>
 
-            <div class="grid md:grid-cols-2 gap-6" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 16px;">
                 <!-- FAQ 1 -->
-                <details class="group rounded-xl border border-slate-200/80 p-5 shadow-xs transition-all hover:border-slate-300" style="background-color: #fbfcfd; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 20px;">
+                <details class="group p-5 transition-all" style="background-color: #ffffff; border: 1px solid #f1f5f9; box-shadow: 0 4px 14px rgba(0,0,0,0.04); border-radius: 8px; padding: 20px 24px;">
                     <summary class="flex justify-between items-center cursor-pointer select-none font-medium text-slate-900 text-sm md:text-[15px]" style="cursor: pointer; list-style: none; font-size: 14.5px; font-weight: 600; color: #1e293b; display: flex; justify-content: space-between; align-items: center;">
-                        <span>{{ $isEn ? 'Why do enterprises in Indonesia need a cyber security consultant?' : 'Mengapa perusahaan enterprise di Indonesia butuh cyber security consultant?' }}</span>
-                        <span class="text-slate-400 group-open:rotate-45 transition-transform duration-200 text-lg ml-4" style="color: #64748b; font-size: 20px; font-weight: 300;">+</span>
+                        <span style="padding-right: 16px;">{{ $isEn ? 'Why do enterprises in Indonesia need a cyber security consultant?' : 'Mengapa perusahaan enterprise di Indonesia butuh cyber security consultant?' }}</span>
+                        <span class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-light text-base shrink-0 group-open:rotate-45 transition-transform duration-200" style="width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background-color: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #475569;">+</span>
                     </summary>
-                    <p class="mt-3 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-top: 12px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
+                    <p class="mt-3 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-top: 14px; padding-top: 14px; border-top: 1px solid #f1f5f9;">
                         {{ $isEn ? 'Cyber threats in Indonesia continue to rise, and regulations (such as UU PDP) mandate strict data protection. Cybersecurity consultants help identify blind spots missed by internal teams, provide independent validation, and ensure optimal regulatory compliance.' : 'Ancaman siber di Indonesia terus meningkat dan regulasi (seperti UU PDP) mewajibkan perlindungan data yang ketat. Cyber security consultant membantu mengidentifikasi celah yang terlewat oleh tim internal, memberikan panduan independen, dan memastikan kepatuhan regulasi secara optimal.' }}
                     </p>
                 </details>
 
                 <!-- FAQ 2 -->
-                <details class="group rounded-xl border border-slate-200/80 p-5 shadow-xs transition-all hover:border-slate-300" style="background-color: #fbfcfd; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 20px;">
+                <details class="group p-5 transition-all" style="background-color: #ffffff; border: 1px solid #f1f5f9; box-shadow: 0 4px 14px rgba(0,0,0,0.04); border-radius: 8px; padding: 20px 24px;">
                     <summary class="flex justify-between items-center cursor-pointer select-none font-medium text-slate-900 text-sm md:text-[15px]" style="cursor: pointer; list-style: none; font-size: 14.5px; font-weight: 600; color: #1e293b; display: flex; justify-content: space-between; align-items: center;">
-                        <span>{{ $isEn ? 'When should an enterprise conduct a security assessment?' : 'Kapan perusahaan perlu melakukan security assessment?' }}</span>
-                        <span class="text-slate-400 group-open:rotate-45 transition-transform duration-200 text-lg ml-4" style="color: #64748b; font-size: 20px; font-weight: 300;">+</span>
+                        <span style="padding-right: 16px;">{{ $isEn ? 'When should an enterprise conduct a security assessment?' : 'Kapan perusahaan perlu melakukan security assessment?' }}</span>
+                        <span class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-light text-base shrink-0 group-open:rotate-45 transition-transform duration-200" style="width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background-color: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #475569;">+</span>
                     </summary>
-                    <p class="mt-3 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-top: 12px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
+                    <p class="mt-3 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-top: 14px; padding-top: 14px; border-top: 1px solid #f1f5f9;">
                         {{ $isEn ? 'Security assessments should be performed periodically (at least 1–2 times a year), before launching new critical systems or applications, after major infrastructure updates, or when preparing for compliance audits (such as ISO 27001 and PCI-DSS).' : 'Security assessment disarankan dilakukan secara berkala (minimal 1-2 kali setahun), sebelum peluncuran sistem atau aplikasi baru, setelah perubahan infrastruktur besar, atau saat mempersiapkan sertifikasi kepatuhan (seperti ISO 27001 dan PCI-DSS).' }}
                     </p>
                 </details>
 
                 <!-- FAQ 3 -->
-                <details class="group rounded-xl border border-slate-200/80 p-5 shadow-xs transition-all hover:border-slate-300" style="background-color: #fbfcfd; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 20px;">
+                <details class="group p-5 transition-all" style="background-color: #ffffff; border: 1px solid #f1f5f9; box-shadow: 0 4px 14px rgba(0,0,0,0.04); border-radius: 8px; padding: 20px 24px;">
                     <summary class="flex justify-between items-center cursor-pointer select-none font-medium text-slate-900 text-sm md:text-[15px]" style="cursor: pointer; list-style: none; font-size: 14.5px; font-weight: 600; color: #1e293b; display: flex; justify-content: space-between; align-items: center;">
-                        <span>{{ $isEn ? 'What does a Cyber Security Consultant do?' : 'Apa yang dilakukan Cyber Security Consultant?' }}</span>
-                        <span class="text-slate-400 group-open:rotate-45 transition-transform duration-200 text-lg ml-4" style="color: #64748b; font-size: 20px; font-weight: 300;">+</span>
+                        <span style="padding-right: 16px;">{{ $isEn ? 'What does a Cyber Security Consultant do?' : 'Apa yang dilakukan Cyber Security Consultant?' }}</span>
+                        <span class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-light text-base shrink-0 group-open:rotate-45 transition-transform duration-200" style="width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background-color: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #475569;">+</span>
                     </summary>
-                    <p class="mt-3 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-top: 12px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
+                    <p class="mt-3 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-top: 14px; padding-top: 14px; border-top: 1px solid #f1f5f9;">
                         {{ $isEn ? 'Consultants evaluate security architectures, conduct penetration testing, assess compliance risks, design security governance policies, and provide practical roadmaps to fortify your organization\'s cyber defense posture.' : 'Konsultan mengevaluasi arsitektur keamanan, melakukan penetration testing, menilai risiko kepatuhan, merancang kebijakan keamanan informasi, dan memberikan rekomendasi praktis untuk memperkuat postur pertahanan siber organisasi Anda.' }}
                     </p>
                 </details>
 
                 <!-- FAQ 4 -->
-                <details class="group rounded-xl border border-slate-200/80 p-5 shadow-xs transition-all hover:border-slate-300" style="background-color: #fbfcfd; border: 1px solid #e2e8f0; border-radius: 12px; padding: 18px 20px;">
+                <details class="group p-5 transition-all" style="background-color: #ffffff; border: 1px solid #f1f5f9; box-shadow: 0 4px 14px rgba(0,0,0,0.04); border-radius: 8px; padding: 20px 24px;">
                     <summary class="flex justify-between items-center cursor-pointer select-none font-medium text-slate-900 text-sm md:text-[15px]" style="cursor: pointer; list-style: none; font-size: 14.5px; font-weight: 600; color: #1e293b; display: flex; justify-content: space-between; align-items: center;">
-                        <span>{{ $isEn ? 'Is DISC only for large enterprises?' : 'Apakah DISC hanya untuk perusahaan besar?' }}</span>
-                        <span class="text-slate-400 group-open:rotate-45 transition-transform duration-200 text-lg ml-4" style="color: #64748b; font-size: 20px; font-weight: 300;">+</span>
+                        <span style="padding-right: 16px;">{{ $isEn ? 'Is DISC only for large enterprises?' : 'Apakah DISC hanya untuk perusahaan besar?' }}</span>
+                        <span class="w-7 h-7 rounded-full bg-slate-100 flex items-center justify-center text-slate-600 font-light text-base shrink-0 group-open:rotate-45 transition-transform duration-200" style="width: 28px; height: 28px; min-width: 28px; border-radius: 50%; background-color: #f1f5f9; display: flex; align-items: center; justify-content: center; font-size: 16px; color: #475569;">+</span>
                     </summary>
-                    <p class="mt-3 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-top: 12px; padding-top: 12px; border-top: 1px solid #f1f5f9;">
+                    <p class="mt-3 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-3" style="color: #475569; font-size: 13.5px; line-height: 1.6; margin-top: 14px; padding-top: 14px; border-top: 1px solid #f1f5f9;">
                         {{ $isEn ? 'No. DISC services are designed to be flexible and scalable, adaptable for mid-market businesses to large enterprise organizations across banking, fintech, healthcare, logistics, and digital services.' : 'Tidak. Layanan DISC dirancang fleksibel dan scalable, dapat disesuaikan untuk perusahaan skala menengah hingga enterprise besar di berbagai sektor seperti perbankan, fintech, logistik, dan e-commerce.' }}
                     </p>
                 </details>
@@ -388,7 +356,7 @@
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <!-- Left: Text & Button -->
                 <div class="text-left">
-                    <h2 class="text-2xl md:text-3xl font-bold mb-3" style="color: #0f172a; margin-bottom: 12px; font-weight: 700; font-size: 28px;">
+                    <h2 class="text-2xl md:text-3xl font-semibold mb-3" style="color: #0f172a; margin-bottom: 12px; font-weight: 600; font-size: 28px;">
                         {{ $isEn ? 'Understand Your Security Posture Risks' : 'Pahami Risiko Security Posture' }}
                     </h2>
                     <p class="text-sm md:text-base leading-relaxed mb-6 max-w-lg" style="color: #475569; margin-bottom: 24px; line-height: 1.6; font-size: 15px;">
@@ -403,7 +371,7 @@
 
                 <!-- Right: 3D Red Shield Illustration -->
                 <div class="flex justify-center md:justify-end items-center">
-                    <img src="/assets/img/disc-shield.webp" alt="Defenxor Security Shield" class="w-full h-auto object-contain drop-shadow-md" style="max-width: 180px;" loading="lazy">
+                    <img src="/assets/img/disc-shield.webp" alt="Defenxor Security Shield" class="w-full h-auto object-contain drop-shadow-md" style="max-width: 260px;" loading="lazy">
                 </div>
             </div>
         </div>
