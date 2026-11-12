@@ -94,7 +94,7 @@
             @endphp
             @if(!empty($btnText) && !empty($btnUrl))
             <div class="{{ (!empty($videoUrl) || !empty($youtubeId)) ? 'mb-12' : '' }}">
-                <a href="{{ $btnUrl }}" target="_blank" rel="noopener noreferrer" class="inline-block bg-[#ae3033] hover:bg-[#8e2427] text-white font-semibold text-sm px-7 py-2.5 rounded-full shadow-md hover:shadow-lg transition-all duration-200 no-underline tracking-wide">
+                <a href="{{ $btnUrl }}" target="_blank" rel="noopener noreferrer" class="inline-block bg-defenxor-red hover:bg-neutral-900 text-white font-semibold text-sm px-7 py-3 rounded shadow hover:shadow-md transition-all duration-200 no-underline tracking-wide">
                     {{ $btnText }}
                 </a>
             </div>
