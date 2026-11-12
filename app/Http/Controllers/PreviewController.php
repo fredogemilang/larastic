@@ -67,6 +67,16 @@ class PreviewController extends Controller
 
     public function page($slug)
     {
+        $aliases = [
+            'dims' => 'defenxor-intelligence-managed-security-dims',
+            'disc' => 'defenxor-intelligence-security-consulting-disc',
+            'disi' => 'defenxor-intelligence-security-integrator-disi',
+        ];
+        $cleanSlug = trim($slug, '/');
+        if (isset($aliases[$cleanSlug])) {
+            $slug = $aliases[$cleanSlug];
+        }
+
         $locale = $this->resolveLocale();
         $defaultLocale = config('static-cms.default_locale', 'id');
 
