@@ -40,7 +40,7 @@
     </section>
 
     <!-- Section: Apa saja Kemampuan DIMS ? -->
-    <section id="kemampuan-dims" class="py-12 border-t border-slate-100">
+    <section id="kemampuan-dims" class="py-12 bg-white" style="background-color: #ffffff;">
         <div class="max-w-[1140px] mx-auto px-4">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <!-- Left: Capabilities List -->
@@ -258,30 +258,28 @@
         </div>
     </section>
 
-    <!-- Section: Belum Siap Membangun SOC Sendiri? (CTA Banner - Contained Box) -->
-    <section style="background-color: #ffffff; padding: 48px 16px; border-top: 1px solid #f1f5f9;">
-        <div style="max-width: 1040px; margin: 0 auto;">
-            <div style="background: linear-gradient(105deg, #f8f9fa 0%, #eaedf1 50%, #d5dbe2 100%); padding: 44px 44px; border-radius: 20px; border: 1px solid #e2e8f0;">
-                <div class="grid md:grid-cols-2 gap-8 items-center">
-                    <!-- Left: Text & Button -->
-                    <div class="text-left">
-                        <h2 class="text-2xl md:text-3xl font-bold mb-3" style="color: #0f172a; margin-bottom: 12px; font-weight: 700; font-size: 26px;">
-                            {{ $isEn ? 'Not Ready to Build Your Own SOC?' : 'Belum Siap Membangun SOC Sendiri?' }}
-                        </h2>
-                        <p class="text-sm md:text-base leading-relaxed mb-6 max-w-lg" style="color: #475569; margin-bottom: 24px; line-height: 1.6; font-size: 15px;">
-                            {{ $isEn ? 'Gain 24/7 SOC capabilities without increasing team complexity, technology overhead, and operational costs.' : 'Dapatkan kapabilitas SOC 24/7 tanpa harus menambah kompleksitas tim, teknologi, dan biaya operasional.' }}
-                        </p>
-                        <div>
-                            <a href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=pmuMKTp9uEuBlt-qXfsxv71xA9X3CdBLgmi2RkLAy_ZUM045QlUzSDJGTzRRNzNSWlcxSVBXUkVVWS4u&route=shorturl" target="_blank" rel="noopener noreferrer" class="inline-block text-white font-semibold text-sm transition-opacity hover:opacity-90 shadow-sm" style="background-color: #ae3033; color: #ffffff; padding: 10px 24px; border-radius: 4px; text-decoration: none; font-size: 14px; font-weight: 600;">
-                                {{ $isEn ? 'Free SOC Consultation' : 'Konsultasi Kebutuhan SOC Gratis' }}
-                            </a>
-                        </div>
+    <!-- Section: Belum Siap Membangun SOC Sendiri? (CTA Banner - Full Width Gray Background, Contained Content) -->
+    <section class="w-full" style="background: linear-gradient(105deg, #f8f9fa 0%, #eaedf1 50%, #d5dbe2 100%); padding: 64px 16px; border-top: 1px solid #e2e8f0;">
+        <div style="max-width: 1040px; margin: 0 auto; padding: 0 16px;">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <!-- Left: Text & Button -->
+                <div class="text-left">
+                    <h2 class="text-2xl md:text-3xl font-bold mb-3" style="color: #0f172a; margin-bottom: 12px; font-weight: 700; font-size: 26px;">
+                        {{ $isEn ? 'Not Ready to Build Your Own SOC?' : 'Belum Siap Membangun SOC Sendiri?' }}
+                    </h2>
+                    <p class="text-sm md:text-base leading-relaxed mb-6 max-w-lg" style="color: #475569; margin-bottom: 24px; line-height: 1.6; font-size: 15px;">
+                        {{ $isEn ? 'Gain 24/7 SOC capabilities without increasing team complexity, technology overhead, and operational costs.' : 'Dapatkan kapabilitas SOC 24/7 tanpa harus menambah kompleksitas tim, teknologi, dan biaya operasional.' }}
+                    </p>
+                    <div>
+                        <a href="https://forms.cloud.microsoft/pages/responsepage.aspx?id=pmuMKTp9uEuBlt-qXfsxv71xA9X3CdBLgmi2RkLAy_ZUM045QlUzSDJGTzRRNzNSWlcxSVBXUkVVWS4u&route=shorturl" target="_blank" rel="noopener noreferrer" class="inline-block text-white font-semibold text-sm transition-opacity hover:opacity-90 shadow-sm" style="background-color: #ae3033; color: #ffffff; padding: 10px 24px; border-radius: 4px; text-decoration: none; font-size: 14px; font-weight: 600;">
+                            {{ $isEn ? 'Free SOC Consultation' : 'Konsultasi Kebutuhan SOC Gratis' }}
+                        </a>
                     </div>
+                </div>
 
-                    <!-- Right: 3D Illustration -->
-                    <div class="flex justify-center md:justify-end items-center">
-                        <img src="/assets/img/dims-laptop-soc.webp" alt="SOC Security Operations Center Illustration" class="w-full h-auto object-contain" style="max-width: 380px;" loading="lazy">
-                    </div>
+                <!-- Right: 3D Illustration -->
+                <div class="flex justify-center md:justify-end items-center">
+                    <img src="/assets/img/dims-laptop-soc.webp" alt="SOC Security Operations Center Illustration" class="w-full h-auto object-contain" style="max-width: 380px;" loading="lazy">
                 </div>
             </div>
         </div>
