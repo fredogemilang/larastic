@@ -1,4 +1,5 @@
 *.log
+error_log
 .DS_Store
 .env
 .env.backup
@@ -27,3 +28,5 @@ Homestead.yaml
 Thumbs.db
 bootstrap.zip
 app.zip
+.htaccess
+/public/.htaccess
