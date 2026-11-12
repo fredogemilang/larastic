@@ -1,8 +1,14 @@
 @extends('static.layouts.base', ['title' => $page->title, 'seoTitle' => $page->seo_title, 'seoDescription' => $page->seo_description, 'seoImage' => $page->seo_image, 'canonicalUrl' => $page->canonical_url])
 
 @section('content')
-    @php $b = $page->content_blocks ?? []; @endphp
+    @php
+        $b = $page->content_blocks ?? [];
+        $isDims = ($page->slug === 'defenxor-intelligence-managed-security-dims' || $page->slug === 'dims' || $page->template === 'dims');
+    @endphp
 
+    @if($isDims)
+        @include('static.pages.dims-content')
+    @else
     <main class="pt-24 pb-12">
         <!-- Hero Title -->
         <div class="max-w-[1140px] mx-auto px-4 text-center mt-8 mb-8">
@@ -92,6 +98,7 @@
         </section>
         @endif
     </main>
+    @endif
 
     <!-- BEGIN: Pre-Footer -->
     <section class="bg-gray-500 py-12 text-white border-t border-gray-400">

@@ -63,41 +63,192 @@ class DefenxorPagesSeeder extends Seeder
         );
 
         // ─── DIMS PAGE ─────────────────────────────────────────
+        $dimsContentId = [
+            'breadcrumb' => [
+                'title' => 'Managed Security Service Provider (MSSP) 24/7 SOC I Defenxor DIMS',
+                'subtitle' => 'Managed Security Service Provider (MSSP)',
+            ],
+            'hero' => [
+                'title' => 'Managed Security Service Provider (MSSP) 24/7 SOC<br>Defenxor Intelligence Managed Security (DIMS)',
+                'subtitle' => 'Defenxor Intelligence Managed Security (DIMS) adalah layanan Managed Service Provider (MSSP) didukung Security Operations Center (SOC) 24/7 untuk membantu perusahaan mendeteksi ancaman, memantau lingkungan IT, dan merespons insiden dengan cepat.',
+                'cta_text' => 'Jelajahi Managed SOC',
+                'cta_url' => '#kemampuan-dims',
+            ],
+            'capabilities' => [
+                'title' => 'Apa saja <span class="text-defenxor-red font-medium">Kemampuan DIMS ?</span>',
+                'image' => '/assets/img/dims-di-ms.webp',
+                'items' => [
+                    [
+                        'title' => '24/7 SOC Monitoring',
+                        'description' => 'Pantau aktivitas keamanan secara real-time, 24/7, dengan dukungan security analyst untuk mendeteksi aktivitas mencurigakan lebih cepat.',
+                    ],
+                    [
+                        'title' => 'Intelligence-Driven Threat Detection & Response',
+                        'description' => 'Identifikasi ancaman lebih cepat dengan korelasi log management, SIEM, threat intelligence, dan analisis aktivitas untuk memprioritaskan risiko.',
+                    ],
+                    [
+                        'title' => 'Incident Response & Remediation',
+                        'description' => 'Saat terjadi insiden, tim Defenxor akan melakukan respons, containment, dan rapid remediation untuk meminimalkan dampak terhadap bisnis.',
+                    ],
+                ],
+            ],
+            'comparison' => [
+                'title' => 'MEMBANDINGKAN IN-HOUSE SOC VS MANAGED SOC',
+                'rows' => [
+                    [
+                        'feature' => 'Operasional',
+                        'in_house' => 'Perlu membangun shift dan coverage internal',
+                        'dims' => 'Monitoring SOC 24/7',
+                    ],
+                    [
+                        'feature' => 'Security Talent',
+                        'in_house' => 'Rekrut - Latih - Pertahankan tim sendiri',
+                        'dims' => 'Didukung security professionals',
+                    ],
+                    [
+                        'feature' => 'Security Technology',
+                        'in_house' => 'Investasi, integrasi, dan pengelolaan sendiri',
+                        'dims' => 'Managed security platform & SIEM',
+                    ],
+                    [
+                        'feature' => 'Incident Response',
+                        'in_house' => 'Bergantung pada kesiapan internal',
+                        'dims' => 'Dukungan incident response & management',
+                    ],
+                ],
+            ],
+            'why_dims' => [
+                'title' => 'MENGAPA DIMS?',
+                'image' => '/assets/img/DIMS-Main-Feature-1.webp',
+                'items' => [
+                    ['title' => '24/7 Security Monitoring', 'description' => 'Keamanan dipantau real-time dan nonstop oleh SOC analyst.'],
+                    ['title' => 'Tim Profesional Bersertifikat', 'description' => 'Didukung profesional dengan sertifikasi dan pengalaman di bidang IT security.'],
+                    ['title' => 'Operasional di Indonesia', 'description' => 'Operasional berbasis di Indonesia untuk mendukung kebutuhan keamanan dan akses yang lebih dekat.'],
+                    ['title' => 'Scalable', 'description' => 'Layanan dapat disesuaikan dengan kebutuhan organisasi tanpa kompleksitas membangun SOC dari awal.'],
+                    ['title' => 'Terintegrasi', 'description' => 'Monitoring, log management, vulnerability management, dan incident response dalam satu layanan.'],
+                ],
+            ],
+            'cta_banner' => [
+                'title' => 'Belum Siap Membangun SOC Sendiri?',
+                'subtitle' => 'Dapatkan kapabilitas SOC 24/7 tanpa harus menambah kompleksitas tim, teknologi, dan biaya operasional.',
+                'cta_text' => 'Konsultasi Kebutuhan SOC Gratis',
+                'cta_url' => 'https://forms.cloud.microsoft/pages/responsepage.aspx?id=pmuMKTp9uEuBlt-qXfsxv71xA9X3CdBLgmi2RkLAy_ZUM045QlUzSDJGTzRRNzNSWlcxSVBXUkVVWS4u&route=shorturl',
+                'image' => '/assets/img/dims-laptop-soc.webp',
+            ],
+        ];
+
+        $dimsSlugs = ['dims', 'defenxor-intelligence-managed-security-dims'];
+        foreach ($dimsSlugs as $slug) {
+            Page::where('slug', $slug)->where('locale', 'id')->update([
+                'template' => 'dims',
+                'content_blocks' => $dimsContentId,
+            ]);
+        }
+
         Page::updateOrCreate(
-            ['slug' => 'dims'],
+            ['slug' => 'defenxor-intelligence-managed-security-dims', 'locale' => 'id'],
             [
                 'title' => 'Defenxor Intelligence Managed Security (DIMS)',
-                'template' => 'services',
+                'template' => 'dims',
                 'status' => 'published',
                 'seo_title' => 'DIMS — Defenxor Intelligence Managed Security',
                 'seo_description' => 'DIMS hadir untuk menghilangkan kompleksitas dalam mengelola fungsi security. Managed Security Service Provider (MSSP) untuk bisnis Anda.',
                 'sort_order' => 2,
-                'content_blocks' => [
-                    'hero' => [
-                        'title' => 'Defenxor Intelligence Managed Security (DIMS)',
-                        'subtitle' => 'Managed Security Service Provider (MSSP)',
+                'content_blocks' => $dimsContentId,
+            ]
+        );
+
+        $dimsContentEn = [
+            'breadcrumb' => [
+                'title' => 'Managed Security Service Provider (MSSP) 24/7 SOC | Defenxor DIMS',
+                'subtitle' => 'Managed Security Service Provider (MSSP)',
+            ],
+            'hero' => [
+                'title' => 'Managed Security Service Provider (MSSP) 24/7 SOC<br>Defenxor Intelligence Managed Security (DIMS)',
+                'subtitle' => 'Defenxor Intelligence Managed Security (DIMS) is a Managed Security Service Provider (MSSP) supported by a 24/7 Security Operations Center (SOC) to help organizations detect threats, monitor IT environments, and respond to incidents rapidly.',
+                'cta_text' => 'Explore Managed SOC',
+                'cta_url' => '#kemampuan-dims',
+            ],
+            'capabilities' => [
+                'title' => 'What are <span class="text-defenxor-red font-medium">DIMS Capabilities ?</span>',
+                'image' => '/assets/img/dims-di-ms.webp',
+                'items' => [
+                    [
+                        'title' => '24/7 SOC Monitoring',
+                        'description' => 'Monitor security activities in real-time, 24/7, with qualified security analyst support to detect suspicious activities faster.',
                     ],
-                    'description' => '<h2>Apa Itu <span class="text-defenxor-red font-medium">DIMS ?</span></h2><p>Demi mengamankan bisnis Anda dari ancaman-ancaman yang ada saat ini, pada umumnya Anda membutuhkan hardware, para ahli untuk mengoperasikannya, serta kebijakan yang dijadikan \'aturan main\'. Pendekatan semacam ini (Teknologi, SDM, dan Proses) memang diperlukan agar mendapatkan IT security yang optimal. Ahli IT security profesional sangatlah mahal dan sulit untuk didapatkan. Terlebih lagi, mendapatkan dan mengadopsi aturan dan prosedur IT security jugalah sulit. Hal ini terjadi karena beberapa hal, seperti tipe ancaman yang selalu berubah, harga sumber daya, permasalahan kompatibilitas, dan kepatuhan.</p><p>Itulah mengapa Defenxor Intelligence Managed Security (DIMS) hadir untuk bisnis Anda. Kami menghilangkan kompleksitas dalam mengelola fungsi security. DIMS menyediakan para ahli security serta mengikuti aturan security yang terstandarisasi. Kami dapat membantu Anda dalam meningkatkan postur security serta memaksimalkan investasi Anda dalam teknologi security.</p>',
-                    'description_image' => '',
-                    'features_title' => 'FITUR UTAMA',
-                    'features_image' => '',
-                    'features' => [
-                        ['title' => 'Defenxor Appliances', 'description' => 'Seperangkat alat yang dikembangkan secara in-house dan dapat digunakan untuk mendeteksi dan merespon sebuah insiden dengan cepat, sebelum insiden tersebut merusak lingkungan Anda.'],
-                        ['title' => 'Aplikasi Mobile Real-time', 'description' => 'Memberikan gambaran secara real-time terkait status proteksi bisnis Anda maupun updates dimanapun dan kapanpun.'],
-                        ['title' => 'Mitra Global Terpercaya', 'description' => 'Didukung oleh perusahaan yang telah dipercaya secara global. Kami terafiliasi dengan CTI Group, salah satu mitra solusi infrastruktur TI terbesar di Indonesia.'],
-                        ['title' => 'Tim Tersertifikasi', 'description' => 'Para profesional tersertifikasi (CISSP, CISA, ISO 27001 LA, ISO 20000 LA, PCI QSA) dengan track record yang baik dalam IT security.'],
-                        ['title' => 'Beroperasi di Dalam Negeri', 'description' => 'Didirikan dan beroperasi di dalam negeri, memberikan aksesibilitas dan memastikan level privasi tertinggi.'],
+                    [
+                        'title' => 'Intelligence-Driven Threat Detection & Response',
+                        'description' => 'Identify threats faster with correlated log management, SIEM, threat intelligence, and behavioral analytics to prioritize risks.',
                     ],
-                    'advantages_title' => 'KEUNGGULAN KAMI',
-                    'advantages_image' => '',
-                    'advantages' => [
-                        ['title' => 'Defenxor Appliances', 'description' => 'Seperangkat alat yang dikembangkan secara in-house untuk mendeteksi dan merespon insiden dengan cepat.'],
-                        ['title' => 'Aplikasi Mobile Real-time', 'description' => 'Gambaran real-time terkait status proteksi bisnis Anda.'],
-                        ['title' => 'Mitra Terpercaya Global', 'description' => 'Terafiliasi dengan CTI Group, mitra solusi infrastruktur TI terbesar di Indonesia.'],
-                        ['title' => 'Tim Profesional Tersertifikasi', 'description' => 'CISSP, CISA, ISO 27001 LA, ISO 20000 LA, PCI QSA.'],
-                        ['title' => 'Operasi Domestik', 'description' => 'Aksesibilitas dan privasi tertinggi dari dalam negeri.'],
+                    [
+                        'title' => 'Incident Response & Remediation',
+                        'description' => 'When an incident occurs, the Defenxor team provides rapid response, containment, and remediation to minimize business impact.',
                     ],
                 ],
+            ],
+            'comparison' => [
+                'title' => 'COMPARING IN-HOUSE SOC VS MANAGED SOC',
+                'rows' => [
+                    [
+                        'feature' => 'Operations',
+                        'in_house' => 'Need to build internal shift and coverage',
+                        'dims' => '24/7 SOC Monitoring',
+                    ],
+                    [
+                        'feature' => 'Security Talent',
+                        'in_house' => 'Recruit - Train - Retain your own team',
+                        'dims' => 'Supported by certified security professionals',
+                    ],
+                    [
+                        'feature' => 'Security Technology',
+                        'in_house' => 'Self-funded investment, integration, and management',
+                        'dims' => 'Managed security platform & SIEM',
+                    ],
+                    [
+                        'feature' => 'Incident Response',
+                        'in_house' => 'Dependent on internal readiness',
+                        'dims' => 'Incident response & management support',
+                    ],
+                ],
+            ],
+            'why_dims' => [
+                'title' => 'WHY DIMS?',
+                'image' => '/assets/img/DIMS-Main-Feature-1.webp',
+                'items' => [
+                    ['title' => '24/7 Security Monitoring', 'description' => 'Security is monitored in real-time and nonstop by SOC analysts.'],
+                    ['title' => 'Certified Professional Team', 'description' => 'Supported by professionals with certifications and extensive experience in IT security.'],
+                    ['title' => 'Operations in Indonesia', 'description' => 'Indonesia-based operations to support localized compliance, security requirements, and closer access.'],
+                    ['title' => 'Scalable', 'description' => 'Services can be tailored to organizational needs without the complexity of building a SOC from scratch.'],
+                    ['title' => 'Integrated', 'description' => 'Monitoring, log management, vulnerability management, and incident response within a single unified service.'],
+                ],
+            ],
+            'cta_banner' => [
+                'title' => 'Not Ready to Build Your Own SOC?',
+                'subtitle' => 'Gain 24/7 SOC capabilities without increasing team complexity, technology overhead, and operational costs.',
+                'cta_text' => 'Free SOC Consultation',
+                'cta_url' => 'https://forms.cloud.microsoft/pages/responsepage.aspx?id=pmuMKTp9uEuBlt-qXfsxv71xA9X3CdBLgmi2RkLAy_ZUM045QlUzSDJGTzRRNzNSWlcxSVBXUkVVWS4u&route=shorturl',
+                'image' => '/assets/img/dims-laptop-soc.webp',
+            ],
+        ];
+
+        foreach ($dimsSlugs as $slug) {
+            Page::where('slug', $slug)->where('locale', 'en')->update([
+                'template' => 'dims',
+                'content_blocks' => $dimsContentEn,
+            ]);
+        }
+
+        Page::updateOrCreate(
+            ['slug' => 'defenxor-intelligence-managed-security-dims', 'locale' => 'en'],
+            [
+                'title' => 'Defenxor Intelligence Managed Security (DIMS)',
+                'template' => 'dims',
+                'status' => 'published',
+                'seo_title' => 'DIMS — Defenxor Intelligence Managed Security',
+                'seo_description' => 'DIMS removes the complexity of managing security functions. Managed Security Service Provider (MSSP) for your business.',
+                'sort_order' => 2,
+                'content_blocks' => $dimsContentEn,
             ]
         );
 
