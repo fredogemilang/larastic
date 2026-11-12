@@ -46,11 +46,11 @@
                             @if($mobileImage)
                             <picture class="absolute inset-0 w-full h-full">
                                 <source media="(max-width: 768px)" srcset="{{ $mobileImage }}">
-                                <img alt="{{ strip_tags($slide['title'] ?? 'Feature') }}" class="w-full h-full object-{{ str_contains($sideImage, 'DISI') ? 'contain' : 'cover' }}"
+                                <img alt="{{ trim(preg_replace('/\s+/', ' ', strip_tags(str_replace(['<br>', '<br/>', '<br />'], ' ', $slide['title'] ?? 'Feature')))) }}" class="w-full h-full object-{{ str_contains($sideImage, 'DISI') ? 'contain' : 'cover' }}"
                                     src="{{ $sideImage }}" {{ $i === 0 ? 'fetchpriority=high' : 'loading=lazy' }} />
                             </picture>
                             @else
-                            <img alt="{{ strip_tags($slide['title'] ?? 'Feature') }}" class="absolute inset-0 w-full h-full object-{{ str_contains($sideImage, 'DISI') ? 'contain' : 'cover' }}"
+                            <img alt="{{ trim(preg_replace('/\s+/', ' ', strip_tags(str_replace(['<br>', '<br/>', '<br />'], ' ', $slide['title'] ?? 'Feature')))) }}" class="absolute inset-0 w-full h-full object-{{ str_contains($sideImage, 'DISI') ? 'contain' : 'cover' }}"
                                 src="{{ $sideImage }}" {{ $i === 0 ? 'fetchpriority=high' : 'loading=lazy' }} />
                             @endif
                         </div>
