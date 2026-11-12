@@ -257,7 +257,7 @@
     </section>
 
     <!-- Section: Belum Siap Membangun SOC Sendiri? (CTA Banner) -->
-    <section class="py-16 border-t border-slate-200" style="background-color: #f1f3f5;">
+    <section class="py-16 border-t border-slate-200" style="background: linear-gradient(105deg, #f8f9fa 0%, #eaedf1 50%, #d5dbe2 100%);">
         <div class="max-w-[1140px] mx-auto px-4">
             <div class="grid md:grid-cols-2 gap-8 items-center">
                 <!-- Left: Text & Button -->
@@ -277,7 +277,7 @@
 
                 <!-- Right: 3D Illustration -->
                 <div class="flex justify-center md:justify-end items-center">
-                    <img src="/assets/img/dims-laptop-soc.webp" alt="SOC Security Operations Center Illustration" class="max-w-[360px] md:max-w-[420px] w-full h-auto object-contain drop-shadow-md" loading="lazy">
+                    <img src="/assets/img/dims-laptop-soc.webp" alt="SOC Security Operations Center Illustration" class="max-w-[360px] md:max-w-[420px] w-full h-auto object-contain drop-shadow-lg" loading="lazy">
                 </div>
             </div>
         </div>
