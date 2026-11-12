@@ -22,9 +22,9 @@
                     <div class="max-w-[1140px] mx-auto px-4 w-full grid md:grid-cols-2 gap-12 items-center">
                         <div class="text-white">
                             @if($i === 0)
-                            <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-6">{{ $slide['title'] ?? '' }}</h1>
+                            <h1 class="text-3xl md:text-4xl font-bold leading-tight mb-6">{!! nl2br(e(str_replace(['<br>', '<br/>', '<br />'], "\n", $slide['title'] ?? ''))) !!}</h1>
                             @else
-                            <h2 class="text-3xl md:text-4xl font-bold leading-tight mb-6">{{ $slide['title'] ?? '' }}</h2>
+                            <h2 class="text-3xl md:text-4xl font-bold leading-tight mb-6">{!! nl2br(e(str_replace(['<br>', '<br/>', '<br />'], "\n", $slide['title'] ?? ''))) !!}</h2>
                             @endif
                             <p class="text-lg text-gray-300 max-w-lg mb-8">{{ $slide['subtitle'] ?? '' }}</p>
                             @if(!empty($slide['cta_text']))
@@ -46,11 +46,11 @@
                             @if($mobileImage)
                             <picture class="absolute inset-0 w-full h-full">
                                 <source media="(max-width: 768px)" srcset="{{ $mobileImage }}">
-                                <img alt="{{ $slide['title'] ?? 'Feature' }}" class="w-full h-full object-{{ str_contains($sideImage, 'DISI') ? 'contain' : 'cover' }}"
+                                <img alt="{{ strip_tags($slide['title'] ?? 'Feature') }}" class="w-full h-full object-{{ str_contains($sideImage, 'DISI') ? 'contain' : 'cover' }}"
                                     src="{{ $sideImage }}" {{ $i === 0 ? 'fetchpriority=high' : 'loading=lazy' }} />
                             </picture>
                             @else
-                            <img alt="{{ $slide['title'] ?? 'Feature' }}" class="absolute inset-0 w-full h-full object-{{ str_contains($sideImage, 'DISI') ? 'contain' : 'cover' }}"
+                            <img alt="{{ strip_tags($slide['title'] ?? 'Feature') }}" class="absolute inset-0 w-full h-full object-{{ str_contains($sideImage, 'DISI') ? 'contain' : 'cover' }}"
                                 src="{{ $sideImage }}" {{ $i === 0 ? 'fetchpriority=high' : 'loading=lazy' }} />
                             @endif
                         </div>

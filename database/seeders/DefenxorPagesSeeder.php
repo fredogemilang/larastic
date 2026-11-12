@@ -22,8 +22,8 @@ class DefenxorPagesSeeder extends Seeder
                 'content_blocks' => [
                     'slides' => [
                         [
-                            'title' => 'Defenxor Percaya bahwa Security Haruslah Mudah.',
-                            'subtitle' => 'Kami dapat membantu Anda mengurangi kompleksitas dalam mengurus kemanan TI, memastikan respon yang lebih baik dan cepat terhadap insiden, serta mematuhi persyaratan dan regulasi yang ada.',
+                            'title' => 'Ancaman Terus Berkembang<br>Security Anda Harus Lebih Cepat',
+                            'subtitle' => 'Defenxor membantu perusahaan di Indonesia mendeteksi, merespons, dan mengelola ancaman siber melalui 24/7 managed security, threat intelligence, security consulting, dan security integration.',
                             'image' => '/assets/img/bg1.webp',
                             'side_image' => '/assets/img/DIMS-Main-Feature-1.webp',
                         ],
