@@ -509,37 +509,230 @@ class DefenxorPagesSeeder extends Seeder
         );
 
         // ─── DISI PAGE ─────────────────────────────────────────
-        Page::updateOrCreate(
-            ['slug' => 'disi'],
-            [
-                'title' => 'Defenxor Intelligence Security Integrator (DISI)',
-                'template' => 'services',
-                'status' => 'published',
-                'seo_title' => 'DISI — Defenxor Intelligence Security Integrator',
-                'seo_description' => 'Dari hardware hingga software keamanan IT, semua kebutuhan Anda terpenuhi. Integrasi solusi keamanan end-to-end.',
-                'sort_order' => 4,
-                'content_blocks' => [
-                    'hero' => [
-                        'title' => 'Defenxor Intelligence Security Integrator (DISI)',
-                        'subtitle' => 'Comprehensive Security Integrator',
+        $disiContentId = [
+            'breadcrumb' => [
+                'title' => 'Comprehensive Security Integrator & Infrastructure I Defenxor DISI',
+                'subtitle' => 'Comprehensive Security Integrator',
+            ],
+            'hero' => [
+                'title' => 'Comprehensive Security Integrator for Enterprise',
+                'subtitle' => 'Defenxor Intelligence Security Integrator (DISI) menyatukan berbagai teknologi keamanan menjadi satu defense ecosystem yang terintegrasi.',
+                'cta_text' => 'Build Your Security Ecosystem',
+                'cta_url' => '#apa-itu-disi',
+            ],
+            'what_is' => [
+                'title' => 'Apa Itu Defenxor DISI ?',
+                'description' => 'Defenxor Intelligence Security Integrator (DISI) membantu enterprise di Indonesia merancang, mengimplementasikan, mengintegrasikan, dan mengoptimalkan infrastruktur keamanan multi-vendor agar lebih scalable, efektif, dan siap menghadapi ancaman yang terus berkembang.',
+                'image' => '/assets/img/disi-logo.webp',
+            ],
+            'why_disi' => [
+                'title' => 'MENGAPA PILIH DISI?',
+                'image' => '/assets/img/disi-differentiation.webp',
+                'items' => [
+                    ['title' => 'Security Tools Saling Terhubung', 'description' => 'DISI menyatukan berbagai security tools untuk network, endpoint, identity, cloud, dan threat intelligence menjadi satu ekosistem keamanan yang terintegrasi dan saling terhubung.'],
+                    ['title' => 'Design', 'description' => 'DISI dirancang dengan arsitektur security sesuai kebutuhan bisnis dan infrastruktur.'],
+                    ['title' => 'Integrate', 'description' => 'Hubungkan teknologi multi-vendor menjadi satu ekosistem.'],
+                    ['title' => 'Optimize', 'description' => 'Optimalkan konfigurasi, performa, dan security posture secara berkelanjutan.'],
+                    ['title' => 'Security Mindset', 'description' => 'Kami adalah perusahaan yang fokus pada keamanan siber. Tim bukan hanya paham cara implementasi, tapi juga mengerti bagaimana cara kerja penyerang, dan mencegahnya.'],
+                ],
+            ],
+            'how_it_works' => [
+                'title' => 'BAGAIMANA CARA KERJA DISI?',
+                'image' => '/assets/img/disi-architecture.webp',
+                'items' => [
+                    ['title' => 'Access', 'description' => 'Pahami kondisi infrastruktur, security tools, dan kebutuhan bisnis.'],
+                    ['title' => 'Design', 'description' => 'Susun security architecture dan teknologi yang paling sesuai.'],
+                    ['title' => 'Integrate', 'description' => 'Implementasikan dan hubungkan solusi multi-vendor.'],
+                    ['title' => 'Optimize', 'description' => 'Fine-tune configuration, hardening, dan performance.'],
+                    ['title' => 'Evolve', 'description' => 'Kembangkan security ecosystem dengan kebutuhan bisnis dan ancaman baru.'],
+                ],
+            ],
+            'why_integrate' => [
+                'title' => 'MENGAPA HARUS MENGINTEGRASIKAN SECURITY STACK?',
+                'image' => '/assets/img/disi-security-stack.webp',
+                'items' => [
+                    ['title' => 'Mengurangi Ketergantungan Silo', 'description' => 'Hubungkan berbagai security technologies dalam satu ecosystem.'],
+                    ['title' => 'Kurangi Security Gaps', 'description' => 'Kurangi celah yang muncul akibat tools dan infrastructure yang berjalan terpisah.'],
+                    ['title' => 'Sederhanakan Operasional', 'description' => 'Buat environment security lebih mudah dikelola dan dioptimalkan.'],
+                    ['title' => 'Mendukung Pertumbuhan Bisnis', 'description' => 'Bangun architecture yang dapat berkembang mengikuti kebutuhan enterprise.'],
+                ],
+            ],
+            'comparison' => [
+                'title' => 'PERBEDAAN DISI DAN DIMS',
+                'columns' => ['DISI', 'DIMS'],
+                'rows' => [
+                    ['disi' => 'Security integration', 'dims' => 'Managed security'],
+                    ['disi' => 'Design & architecture', 'dims' => 'Monitoring & management'],
+                    ['disi' => 'Deployment & implementation', 'dims' => 'Ongoing security operations'],
+                    ['disi' => 'Multi-vendor integration', 'dims' => 'Managed security services'],
+                    ['disi' => 'Security optimization', 'dims' => 'Continuous monitoring & response'],
+                ],
+            ],
+            'faq' => [
+                'title' => 'Frequently Asked Question',
+                'items' => [
+                    [
+                        'question' => 'Apa itu Security Integrator?',
+                        'answer' => 'Security integrator adalah partner yang merancang dan menggabungkan berbagai teknologi keamanan agar dapat bekerja sebagai satu ekosistem yang terintegrasi.',
                     ],
-                    'description' => '<h2>Apa Itu <span class="text-defenxor-red font-medium">DISI ?</span></h2><p>Berencana untuk menambahkan security hardware dalam bisnis Anda? Jangan khawatir, kami siap membantu! Defenxor memudahkan Anda untuk menghindari besarnya capital expenditure (CAPEX) security hardware melalui program cicilan kami. Dengan demikian, investasi Anda terhadap security hardware dapat dikonversikan menjadi operational expenditure (OPEX) bagi bisnis dan memastikan return on investment (ROI) yang optimal.</p><p>Selain menyediakan program cicilan, kami juga menambahkan nilai jual layanan dengan memasukkan layanan managed security ke dalam paket sehingga Anda mendapatkan value terbaik dengan biaya yang Anda keluarkan. Security haruslah terjangkau dan mudah dikelola agar Anda dapat lebih fokus kepada aspek bisnis yang lain.</p>',
-                    'description_image' => '',
-                    'features_title' => 'FITUR UTAMA',
-                    'features_image' => '',
-                    'features' => [
-                        ['title' => 'Program Cicilan untuk Kepemilikan Perangkat Security', 'description' => 'Menurunkan CAPEX dan mengoptimasi OPEX agar bisnis Anda dapat mendapatkan ROI yang optimal.'],
-                        ['title' => 'Harga yang Bersaing untuk Perangkat Security', 'description' => 'Manfaat dari jaringan distribusi hardware kami yang luas sehingga Anda akan selalu mendapatkan harga terbaik di pasar.'],
-                        ['title' => 'Managed Services Tambahan', 'description' => 'Kami juga akan menyediakan pemantauan dan pengelolaan fungsi security yang disatukan dengan pembelian produk dari kami.'],
+                    [
+                        'question' => 'Apa peran Defenxor sebagai Security Integrator?',
+                        'answer' => 'Defenxor membantu enterprise merancang, mengimplementasikan, mengintegrasikan, dan mengoptimalkan berbagai teknologi keamanan sesuai kebutuhan infrastruktur dan bisnis.',
                     ],
-                    'advantages_title' => 'KEUNGGULAN KAMI',
-                    'advantages_image' => '',
-                    'advantages' => [
-                        ['title' => '', 'description' => 'Memiliki portofolio produk security yang luas.'],
-                        ['title' => '', 'description' => 'Security engineer yang mumpuni dan bersertifikasi untuk meng-install dan menerapkan produk.'],
-                        ['title' => '', 'description' => 'Merupakan pionir yang mencetuskan program pembayaran fleksibel dan memberikan nilai tambah bagi layanan bundled security.'],
+                    [
+                        'question' => 'Apa manfaat multi-vendor security integration?',
+                        'answer' => 'Integrasi multi-vendor membantu mengurangi security silo, meningkatkan visibility, dan membuat berbagai security technologies bekerja lebih harmonis dalam satu architecture.',
+                    ],
+                    [
+                        'question' => 'Apakah DISI hanya menyediakan security hardware?',
+                        'answer' => 'Tidak. DISI sebaiknya diposisikan sebagai layanan security architecture, deployment, integration, dan optimization, bukan sekadar penyedia perangkat. Ini juga merupakan perubahan positioning utama yang disarankan dari halaman saat ini.',
+                    ],
+                    [
+                        'question' => 'Apa perbedaan DISI dan DIMS?',
+                        'answer' => 'DISI berfokus pada design, deployment, dan integration security infrastructure, sedangkan DIMS berfokus pada managed security operations dan pengelolaan security environment.',
                     ],
                 ],
+            ],
+            'cta_banner' => [
+                'title' => 'Security Stack Works as One',
+                'subtitle' => 'Satukan semua security stack, kurangi security gaps, dan bangun defense ecosystem yang siap mendukung pertumbuhan bisnis Anda.',
+                'cta_text' => 'Design Your Security Ecosystem',
+                'cta_url' => 'https://forms.cloud.microsoft/pages/responsepage.aspx?id=pmuMKTp9uEuBlt-qXfsxv71xA9X3CdBLgmi2RkLAy_ZUM045QlUzSDJGTzRRNzNSWlcxSVBXUkVVWS4u&route=shorturl',
+                'image' => '/assets/img/disi-server-shields.webp',
+            ],
+        ];
+
+        $disiSlugs = ['disi', 'defenxor-intelligence-security-integrator-disi'];
+        foreach ($disiSlugs as $slug) {
+            Page::where('slug', $slug)->where('locale', 'id')->update([
+                'template' => 'disi',
+                'content_blocks' => $disiContentId,
+            ]);
+        }
+
+        Page::updateOrCreate(
+            ['slug' => 'defenxor-intelligence-security-integrator-disi', 'locale' => 'id'],
+            [
+                'title' => 'Comprehensive Security Integrator & Infrastructure I Defenxor DISI',
+                'template' => 'disi',
+                'status' => 'published',
+                'seo_title' => 'Comprehensive Security Integrator & Infrastructure I Defenxor DISI',
+                'seo_description' => 'Defenxor Intelligence Security Integrator (DISI) menyatukan berbagai teknologi keamanan menjadi satu defense ecosystem yang terintegrasi.',
+                'sort_order' => 4,
+                'content_blocks' => $disiContentId,
+            ]
+        );
+
+        $disiContentEn = [
+            'breadcrumb' => [
+                'title' => 'Comprehensive Security Integrator & Infrastructure | Defenxor DISI',
+                'subtitle' => 'Comprehensive Security Integrator',
+            ],
+            'hero' => [
+                'title' => 'Comprehensive Security Integrator for Enterprise',
+                'subtitle' => 'Defenxor Intelligence Security Integrator (DISI) unifies diverse cybersecurity technologies into a cohesive, integrated defense ecosystem.',
+                'cta_text' => 'Build Your Security Ecosystem',
+                'cta_url' => '#apa-itu-disi',
+            ],
+            'what_is' => [
+                'title' => 'What is Defenxor DISI ?',
+                'description' => 'Defenxor Intelligence Security Integrator (DISI) helps enterprises in Indonesia design, implement, integrate, and optimize multi-vendor security infrastructures to be more scalable, effective, and prepared for evolving threats.',
+                'image' => '/assets/img/disi-logo.webp',
+            ],
+            'why_disi' => [
+                'title' => 'WHY CHOOSE DISI?',
+                'image' => '/assets/img/disi-differentiation.webp',
+                'items' => [
+                    ['title' => 'Interconnected Security Tools', 'description' => 'DISI unites various security tools across network, endpoint, identity, cloud, and threat intelligence into an integrated, connected security ecosystem.'],
+                    ['title' => 'Design', 'description' => 'DISI is engineered with security architecture tailored to business and infrastructure needs.'],
+                    ['title' => 'Integrate', 'description' => 'Seamlessly connect multi-vendor technologies into a single cohesive ecosystem.'],
+                    ['title' => 'Optimize', 'description' => 'Continuously optimize configurations, performance, and security posture.'],
+                    ['title' => 'Security Mindset', 'description' => 'We are dedicated cybersecurity experts. Our team not only understands implementation, but also how attackers operate, and how to defend against them effectively.'],
+                ],
+            ],
+            'how_it_works' => [
+                'title' => 'HOW DOES DISI WORK?',
+                'image' => '/assets/img/disi-architecture.webp',
+                'items' => [
+                    ['title' => 'Assess', 'description' => 'Understand infrastructure state, security tools, and business requirements.'],
+                    ['title' => 'Design', 'description' => 'Develop tailored security architecture and determine optimal technologies.'],
+                    ['title' => 'Integrate', 'description' => 'Implement and interconnect multi-vendor security solutions.'],
+                    ['title' => 'Optimize', 'description' => 'Fine-tune configuration, hardening, and performance.'],
+                    ['title' => 'Evolve', 'description' => 'Adapt and grow the security ecosystem alongside business demands and emerging threats.'],
+                ],
+            ],
+            'why_integrate' => [
+                'title' => 'WHY INTEGRATE YOUR SECURITY STACK?',
+                'image' => '/assets/img/disi-security-stack.webp',
+                'items' => [
+                    ['title' => 'Reduce Siloed Dependencies', 'description' => 'Connect diverse security technologies within a single ecosystem.'],
+                    ['title' => 'Eliminate Security Gaps', 'description' => 'Minimize vulnerabilities caused by fragmented tools and disconnected infrastructure.'],
+                    ['title' => 'Streamline Operations', 'description' => 'Make the security environment easier to manage, monitor, and optimize.'],
+                    ['title' => 'Support Business Growth', 'description' => 'Establish an agile architecture that scales with enterprise demands.'],
+                ],
+            ],
+            'comparison' => [
+                'title' => 'DIFFERENCE BETWEEN DISI AND DIMS',
+                'columns' => ['DISI', 'DIMS'],
+                'rows' => [
+                    ['disi' => 'Security integration', 'dims' => 'Managed security'],
+                    ['disi' => 'Design & architecture', 'dims' => 'Monitoring & management'],
+                    ['disi' => 'Deployment & implementation', 'dims' => 'Ongoing security operations'],
+                    ['disi' => 'Multi-vendor integration', 'dims' => 'Managed security services'],
+                    ['disi' => 'Security optimization', 'dims' => 'Continuous monitoring & response'],
+                ],
+            ],
+            'faq' => [
+                'title' => 'Frequently Asked Question',
+                'items' => [
+                    [
+                        'question' => 'What is a Security Integrator?',
+                        'answer' => 'A security integrator is a specialized partner that designs, deploys, and harmonizes multiple security technologies to operate cohesively as a unified security ecosystem.',
+                    ],
+                    [
+                        'question' => "What is Defenxor's role as a Security Integrator?",
+                        'answer' => 'Defenxor empowers enterprises to design, implement, integrate, and optimize diverse security technologies tailored to specific infrastructure and business requirements.',
+                    ],
+                    [
+                        'question' => 'What are the benefits of multi-vendor security integration?',
+                        'answer' => 'Multi-vendor integration dismantles security silos, elevates visibility, and enables disparate security technologies to work in seamless harmony within a single architecture.',
+                    ],
+                    [
+                        'question' => 'Does DISI only supply security hardware?',
+                        'answer' => 'No. DISI delivers end-to-end security architecture, deployment, integration, and optimization services, far beyond simply supplying physical appliances.',
+                    ],
+                    [
+                        'question' => 'What is the difference between DISI and DIMS?',
+                        'answer' => 'DISI focuses on the design, deployment, and integration of security infrastructure, whereas DIMS focuses on 24/7 managed security operations and environment monitoring.',
+                    ],
+                ],
+            ],
+            'cta_banner' => [
+                'title' => 'Security Stack Works as One',
+                'subtitle' => 'Unify your entire security stack, eliminate vulnerabilities, and build a resilient defense ecosystem ready to scale with your business.',
+                'cta_text' => 'Design Your Security Ecosystem',
+                'cta_url' => 'https://forms.cloud.microsoft/pages/responsepage.aspx?id=pmuMKTp9uEuBlt-qXfsxv71xA9X3CdBLgmi2RkLAy_ZUM045QlUzSDJGTzRRNzNSWlcxSVBXUkVVWS4u&route=shorturl',
+                'image' => '/assets/img/disi-server-shields.webp',
+            ],
+        ];
+
+        foreach ($disiSlugs as $slug) {
+            Page::where('slug', $slug)->where('locale', 'en')->update([
+                'template' => 'disi',
+                'content_blocks' => $disiContentEn,
+            ]);
+        }
+
+        Page::updateOrCreate(
+            ['slug' => 'defenxor-intelligence-security-integrator-disi', 'locale' => 'en'],
+            [
+                'title' => 'Comprehensive Security Integrator & Infrastructure | Defenxor DISI',
+                'template' => 'disi',
+                'status' => 'published',
+                'seo_title' => 'Comprehensive Security Integrator & Infrastructure | Defenxor DISI',
+                'seo_description' => 'Defenxor Intelligence Security Integrator (DISI) unifies diverse cybersecurity technologies into a cohesive, integrated defense ecosystem.',
+                'sort_order' => 4,
+                'content_blocks' => $disiContentEn,
             ]
         );
 
