@@ -380,7 +380,7 @@ class ExportManager extends Component
     {
         return view('livewire.export.export-manager', [
             'exports' => Export::with('triggeredBy')
-                ->orderByDesc('created_at')
+                ->orderByDesc('id')
                 ->take(20)
                 ->get(),
             'latestCompleted' => Export::where('status', 'completed')
