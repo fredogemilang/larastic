@@ -253,45 +253,258 @@ class DefenxorPagesSeeder extends Seeder
         );
 
         // ─── DISC PAGE ─────────────────────────────────────────
-        Page::updateOrCreate(
-            ['slug' => 'disc'],
-            [
-                'title' => 'Defenxor Intelligence Security Consulting (DISC)',
-                'template' => 'services',
-                'status' => 'published',
-                'seo_title' => 'DISC — Defenxor Intelligence Security Consulting',
-                'seo_description' => 'Layanan konsultasi keamanan profesional dari Defenxor. Penetration testing, security assessment, dan compliance consulting.',
-                'sort_order' => 3,
-                'content_blocks' => [
-                    'hero' => [
-                        'title' => 'Defenxor Intelligence Security Consulting (DISC)',
-                        'subtitle' => 'Integrated Security Consulting',
+        $discContentId = [
+            'breadcrumb' => [
+                'title' => 'Cyber Security Consultant Indonesia I Defenxor DISC',
+                'subtitle' => 'Integrated Security Consulting',
+            ],
+            'hero' => [
+                'title' => "Cyber Security Consultant Indonesia<br>untuk Keamanan Terintegrasi",
+                'subtitle' => 'Defenxor Intelligence Security Consulting (DISC) membantu enterprise mengidentifikasi celah keamanan, mengelola risiko, memenuhi compliance, dan membangun security architecture yang terintegrasi serta lebih terarah.',
+                'cta_text' => 'Assess Your Security',
+                'cta_url' => '#apa-itu-disc',
+            ],
+            'what_is' => [
+                'title' => 'Apa Itu Defenxor DISC ?',
+                'paragraphs' => [
+                    'Defenxor Intelligence Security Consulting (DISC) adalah layanan cyber security consulting yang membantu perusahaan memahami kondisi keamanan, menemukan security gaps, dan menentukan langkah perbaikan yang tepat.',
+                    'DISC mencakup security assessment, security audit, security advisory, penetration testing, incident response, dan security certification untuk membantu enterprise membangun security posture yang lebih kuat.',
+                ],
+                'image' => '/assets/img/disc-logo.webp',
+            ],
+            'why_disc' => [
+                'title' => 'KENAPA DISC?',
+                'image' => '/assets/img/disc-cart.webp',
+                'points' => [
+                    'Identifikasi security gaps',
+                    'Prioritaskan risiko kritikal',
+                    'Sesuai dengan regulasi yang berlaku',
+                    'Membangun security posture yang lebih andal',
+                ],
+                'cta_text' => 'Konsultasikan Kebutuhan Security Anda',
+                'cta_url' => 'https://forms.cloud.microsoft/pages/responsepage.aspx?id=pmuMKTp9uEuBlt-qXfsxv71xA9X3CdBLgmi2RkLAy_ZUM045QlUzSDJGTzRRNzNSWlcxSVBXUkVVWS4u&route=shorturl',
+            ],
+            'why_choose' => [
+                'title' => 'MENGAPA PILIH DISC?',
+                'image' => '/assets/img/disc-circles.webp',
+                'items' => [
+                    [
+                        'title' => 'Temukan Celah Sebelum Menjadi Insiden',
+                        'description' => 'Evaluasi security posture, sistem, aplikasi, dan konfigurasi untuk mengidentifikasi vulnerability dan area yang perlu diperbaiki.',
+                        'tags' => 'Security Audit • Vulnerability Assessment • Penetration Testing',
                     ],
-                    'description' => '<h2>Apa Itu <span class="text-defenxor-red font-medium">DISC ?</span></h2><p>Tantangan yang nyata dihadapi bagi semua pebisnis adalah sebagai berikut: \'Apakah Bisnis saya aman?\'</p><p>Anda pasti akan tahu jawabannya secara pasti jika Anda tidak tahu bagaimana memulai proses pengamanan, melakukan review keamanan secara reguler, kami dan mumpun Anda tidak mengetahui apakah sistem Anda benar-benar terekspos dan berskala dari apa yang perlu dilakukan untuk membuat sistem Anda lebih aman. Kami juga dapat membantu Anda untuk mematuhi regulasi dan security compliance.</p><p>Tak perlu cemas-cemas karena Anda tidak dapat berkompromi soal keamanan data. DISC akan memberikan kepercayaan diri Anda untuk mengamankan bisnis. DISC membantu Anda untuk capai tidak henti dengan solusi komprehensif.</p>',
-                    'description_image' => '',
-                    'features_title' => 'FITUR UTAMA',
-                    'features_image' => '',
-                    'features' => [
-                        ['title' => 'Pengembangan Kebijakan Security dan Penggunaannya', 'description' => 'Artinya pengidentifikasian kelemahan yang bernilai tinggi, kebijakan dan penggunaannya pun menjadi secukupnya dan mungkin hal ini secara kebiasan yang ada dapat membantu Anda lebih sadar dan berani dari serangan. Kurangi risiko serangan dengan mengidentifikasikan jalan secara tepat dan menutupi secara optimal.'],
-                        ['title' => 'Pemeriksaan Security', 'description' => 'Apakah keamanan bisnis Anda telah memenuhi standar internasional? Sebuah security audit dapat membantu Anda mengevaluasi postur security Anda dan mengidentifikasi kelemahan yang ada saat ini untuk memenuhi standar ISO 27001.'],
-                        ['title' => 'Bantuan Perihal Security', 'description' => 'Kami menyediakan bantuan bagi tim IT security internal Anda agar mereka dapat meningkatkan kemampuannya dan memastikan bahwa setiap implementasi sesuai dengan standar internasional. Kami juga memastikan dukungan untuk mengoptimalkan dan menghidupkan Security Operation Center (SOC) internal Anda untuk dapat memenuhi target yang telah ditentukan.'],
-                        ['title' => 'Respon & Manajemen Perihal Insiden', 'description' => 'Dengan DISC, Anda bisa mendapatkan respon cepat dari tim kami secara 24/7/365 cepat. Ketika dikombinasikan dengan solusi DIMS, bisnis Anda akan mendapatkan layanan IT security yang komprehensif serta notifikasi secara langsung ketika sebuah insiden ditimbulkan dan kami cepat melakukan proses mitigasi secepatnya.'],
-                        ['title' => 'Penetration Testing & Compromised Testing', 'description' => 'Kami melakukan pengujian yang menyeluruh dengan mengikuti standar dan kerangka kerja internasional demi memastikan IT milik Anda bebas dari kerentanan di setiap waktu.'],
-                        ['title' => 'Sertifikasi Security', 'description' => 'Baik sertifikasi PCI-DSS ataupun ISO 27000, tim kami dapat membantu Anda memenuhinya.'],
+                    [
+                        'title' => 'Bantuan Perihal Security',
+                        'description' => 'Identifikasi risiko, susun prioritas mitigasi, dan selaraskan kontrol keamanan dengan kebutuhan compliance dan regulasi yang relevan. DISC existing juga mencakup security policy development dan certification support, termasuk PCI-DSS dan ISO 27001.',
+                        'tags' => 'Risk Assessment • Security Policy • ISO 27001 • PCI-DSS • UU PDP',
                     ],
-                    'advantages_title' => 'KEUNGGULAN KAMI',
-                    'advantages_image' => '',
-                    'advantages' => [
-                        ['title' => '', 'description' => 'Kami mengevaluasi bagian dari sisi human, proses, dan IT Anda'],
-                        ['title' => '', 'description' => 'Kerangka pengujian berstandar Internasional'],
-                        ['title' => '', 'description' => 'Solusi yang kami berikan didukung dengan konsultasi secara komprehensif, cepat dan profesional'],
-                        ['title' => '', 'description' => 'Pelaporan perkembangan yang komprehensif disertai dengan analitis dari pakar internal kami'],
-                        ['title' => '', 'description' => 'Penggunaan praktik-praktik terbaik industri serta portofolio kami untuk penyesuaian bisnis Anda dan ancaman'],
-                        ['title' => '', 'description' => 'Kami adalah ISO 27001 (Sistem Manajemen Keamanan Informasi), ISO 9001 (Manajemen Mutu), PCI-DSS dengan tim bersertifikasi dari industri IT security'],
-                        ['title' => '', 'description' => 'Program perlindungan komprehensif produk security. Konsultasi dengan pakar penanganan insiden kami tentang manajemen identitas dan security, ini di maningkankan pemahaman perihal security yang Anda miliki'],
-                        ['title' => '', 'description' => 'Layanan yang responsif dan fleksibel yang memenuhi kebutuhan security di organisasi Anda'],
+                    [
+                        'title' => 'Arsitektur Keamanan Terintegrasi',
+                        'description' => 'Rancang security architecture yang mengintegrasikan teknologi, kontrol, dan proses agar perlindungan lebih menyeluruh sesuai kebutuhan bisnis.',
+                        'tags' => 'Architecture Review • Security Strategy • Technology Alignment',
+                    ],
+                    [
+                        'title' => 'Security Advisory & Incident Response',
+                        'description' => 'Dapatkan advisory dari security consultant dan dukungan response untuk menangani serta memitigasi insiden.',
+                        'tags' => 'Security Advisory • Incident Response • SOC Advisory',
                     ],
                 ],
+            ],
+            'how_it_works' => [
+                'title' => 'BAGAIMANA CARA KERJA DISC?',
+                'image' => '/assets/img/disc-city.webp',
+                'items' => [
+                    ['title' => 'Discovery & Assessment', 'description' => 'Petakan kondisi keamanan dengan mengidentifikasi vulnerability, exposure, dan security gaps.'],
+                    ['title' => 'Strategy & Architecture', 'description' => 'Bangun dan tentukan prioritas keamanan berdasarkan risiko serta arah kebutuhan bisnis.'],
+                    ['title' => 'Roadmap Implementasi', 'description' => 'Susun roadmap yang dapat digunakan tim internal untuk mengubah rekomendasi menjadi aksi.'],
+                    ['title' => 'Review & Advisory Berkelanjutan', 'description' => 'Review security secara berkala untuk memastikan posture terus berkembang sesuai riset dan kebutuhan bisnis.'],
+                ],
+            ],
+            'why_defenxor' => [
+                'title' => 'MENGAPA DEFENXOR?',
+                'image' => '/assets/img/disc-team.webp',
+                'items' => [
+                    ['title' => 'Tim Ahli Keamanan Bersertifikat', 'description' => 'Didukung profesional dengan sertifikasi seperti CISSP, CISA, ISO 27001LA, ISO 20000 LA, OSCP, CEH Master, CHFI dan PCI QSA.'],
+                    ['title' => 'Standar Internasional', 'description' => 'Pendekatan assessment dan testing mengacu pada framework seperti OWASP, CIS dan NIST.'],
+                    ['title' => 'Rekomendasi Dapat Ditindaklanjuti', 'description' => 'Anda bukan sekadar menemukan masalah, tetapi juga mendapatkan analisis lengkap, risk rating, dan rekomendasi yang dapat ditindaklanjuti.'],
+                    ['title' => 'Sesuai Kebutuhan Organisasi', 'description' => 'Engagement disesuaikan dengan kebutuhan security, compliance, skala, dan kondisi organisasi.'],
+                ],
+            ],
+            'faq' => [
+                'title' => 'Frequently Asked Question',
+                'items' => [
+                    [
+                        'question' => 'Mengapa perusahaan enterprise di Indonesia butuh cyber security consultant?',
+                        'answer' => 'Ancaman siber di Indonesia terus meningkat dan regulasi (seperti UU PDP) mewajibkan perlindungan data yang ketat. Cyber security consultant membantu mengidentifikasi celah yang terlewat oleh tim internal, memberikan panduan independen, dan memastikan kepatuhan regulasi secara optimal.',
+                    ],
+                    [
+                        'question' => 'Kapan perusahaan perlu melakukan security assessment?',
+                        'answer' => 'Security assessment disarankan dilakukan secara berkala (minimal 1-2 kali setahun), sebelum peluncuran sistem atau aplikasi baru, setelah perubahan infrastruktur besar, atau saat mempersiapkan sertifikasi kepatuhan (seperti ISO 27001 dan PCI-DSS).',
+                    ],
+                    [
+                        'question' => 'Apa yang dilakukan Cyber Security Consultant?',
+                        'answer' => 'Konsultan mengevaluasi arsitektur keamanan, melakukan penetration testing, menilai risiko kepatuhan, merancang kebijakan keamanan informasi, dan memberikan rekomendasi praktis untuk memperkuat postur pertahanan siber organisasi Anda.',
+                    ],
+                    [
+                        'question' => 'Apakah DISC hanya untuk perusahaan besar?',
+                        'answer' => 'Tidak. Layanan DISC dirancang fleksibel dan scalable, dapat disesuaikan untuk perusahaan skala menengah hingga enterprise besar di berbagai sektor seperti perbankan, fintech, logistik, dan e-commerce.',
+                    ],
+                ],
+            ],
+            'cta_banner' => [
+                'title' => 'Pahami Risiko Security Posture',
+                'subtitle' => 'Temukan celah, pahami risiko, dan tentukan langkah berikutnya bersama DISC.',
+                'cta_text' => 'Konsultasi Gratis',
+                'cta_url' => 'https://forms.cloud.microsoft/pages/responsepage.aspx?id=pmuMKTp9uEuBlt-qXfsxv71xA9X3CdBLgmi2RkLAy_ZUM045QlUzSDJGTzRRNzNSWlcxSVBXUkVVWS4u&route=shorturl',
+                'image' => '/assets/img/disc-shield.webp',
+            ],
+        ];
+
+        $discSlugs = ['disc', 'defenxor-intelligence-security-consulting-disc'];
+        foreach ($discSlugs as $slug) {
+            Page::where('slug', $slug)->where('locale', 'id')->update([
+                'template' => 'disc',
+                'content_blocks' => $discContentId,
+            ]);
+        }
+
+        Page::updateOrCreate(
+            ['slug' => 'defenxor-intelligence-security-consulting-disc', 'locale' => 'id'],
+            [
+                'title' => 'Cyber Security Consultant Indonesia I Defenxor DISC',
+                'template' => 'disc',
+                'status' => 'published',
+                'seo_title' => 'Cyber Security Consultant Indonesia I Defenxor DISC',
+                'seo_description' => 'Defenxor Intelligence Security Consulting (DISC) membantu enterprise mengidentifikasi celah keamanan, mengelola risiko, memenuhi compliance, dan membangun security architecture yang terintegrasi.',
+                'sort_order' => 3,
+                'content_blocks' => $discContentId,
+            ]
+        );
+
+        $discContentEn = [
+            'breadcrumb' => [
+                'title' => 'Cyber Security Consultant Indonesia | Defenxor DISC',
+                'subtitle' => 'Integrated Security Consulting',
+            ],
+            'hero' => [
+                'title' => "Cyber Security Consultant Indonesia<br>for Integrated Security",
+                'subtitle' => 'Defenxor Intelligence Security Consulting (DISC) helps enterprises identify security gaps, manage risks, fulfill compliance requirements, and build an integrated, targeted security architecture.',
+                'cta_text' => 'Assess Your Security',
+                'cta_url' => '#apa-itu-disc',
+            ],
+            'what_is' => [
+                'title' => 'What is Defenxor DISC ?',
+                'paragraphs' => [
+                    'Defenxor Intelligence Security Consulting (DISC) is a cyber security consulting service that helps organizations understand their security posture, discover security gaps, and define targeted remediation steps.',
+                    'DISC covers security assessment, security audit, security advisory, penetration testing, incident response, and security certification to help enterprises establish a resilient security posture.',
+                ],
+                'image' => '/assets/img/disc-logo.webp',
+            ],
+            'why_disc' => [
+                'title' => 'WHY DISC?',
+                'image' => '/assets/img/disc-cart.webp',
+                'points' => [
+                    'Identify security gaps',
+                    'Prioritize critical risks',
+                    'Comply with relevant regulations',
+                    'Build a more resilient security posture',
+                ],
+                'cta_text' => 'Consult Your Security Needs',
+                'cta_url' => 'https://forms.cloud.microsoft/pages/responsepage.aspx?id=pmuMKTp9uEuBlt-qXfsxv71xA9X3CdBLgmi2RkLAy_ZUM045QlUzSDJGTzRRNzNSWlcxSVBXUkVVWS4u&route=shorturl',
+            ],
+            'why_choose' => [
+                'title' => 'WHY CHOOSE DISC?',
+                'image' => '/assets/img/disc-circles.webp',
+                'items' => [
+                    [
+                        'title' => 'Discover Vulnerabilities Before They Become Incidents',
+                        'description' => 'Evaluate security posture, systems, applications, and configurations to identify vulnerabilities and areas requiring remediation.',
+                        'tags' => 'Security Audit • Vulnerability Assessment • Penetration Testing',
+                    ],
+                    [
+                        'title' => 'Comprehensive Security Support',
+                        'description' => 'Identify risks, prioritize mitigation efforts, and align security controls with compliance and regulatory demands. DISC also encompasses security policy development and certification support, including PCI-DSS and ISO 27001.',
+                        'tags' => 'Risk Assessment • Security Policy • ISO 27001 • PCI-DSS • Personal Data Protection',
+                    ],
+                    [
+                        'title' => 'Integrated Security Architecture',
+                        'description' => 'Design security architectures that seamlessly integrate technologies, controls, and workflows for end-to-end organizational protection.',
+                        'tags' => 'Architecture Review • Security Strategy • Technology Alignment',
+                    ],
+                    [
+                        'title' => 'Security Advisory & Incident Response',
+                        'description' => 'Receive dedicated expert advisory from cybersecurity consultants along with rapid response support to manage and mitigate incidents.',
+                        'tags' => 'Security Advisory • Incident Response • SOC Advisory',
+                    ],
+                ],
+            ],
+            'how_it_works' => [
+                'title' => 'HOW DOES DISC WORK?',
+                'image' => '/assets/img/disc-city.webp',
+                'items' => [
+                    ['title' => 'Discovery & Assessment', 'description' => 'Map your security landscape by identifying vulnerabilities, exposure points, and security gaps.'],
+                    ['title' => 'Strategy & Architecture', 'description' => 'Define and establish security priorities aligned with risk thresholds and organizational business goals.'],
+                    ['title' => 'Implementation Roadmap', 'description' => 'Develop an actionable roadmap enabling internal teams to translate strategic recommendations into tangible results.'],
+                    ['title' => 'Continuous Review & Advisory', 'description' => 'Regularly review security postures to ensure sustainable resilience as evolving threat landscapes and business requirements change.'],
+                ],
+            ],
+            'why_defenxor' => [
+                'title' => 'WHY DEFENXOR?',
+                'image' => '/assets/img/disc-team.webp',
+                'items' => [
+                    ['title' => 'Certified Security Expert Team', 'description' => 'Backed by experienced professionals holding industry-leading certifications including CISSP, CISA, ISO 27001 LA, ISO 20000 LA, OSCP, CEH Master, CHFI, and PCI QSA.'],
+                    ['title' => 'International Frameworks & Standards', 'description' => 'Assessment and testing methodologies strictly adhere to globally recognized frameworks including OWASP, CIS Controls, and NIST.'],
+                    ['title' => 'Actionable Recommendations', 'description' => 'More than just finding vulnerabilities, you receive in-depth analysis, comprehensive risk ratings, and actionable remediation roadmaps.'],
+                    ['title' => 'Tailored to Organizational Needs', 'description' => 'Consulting engagements are customized to your specific security objectives, compliance requirements, operational scale, and infrastructure realities.'],
+                ],
+            ],
+            'faq' => [
+                'title' => 'Frequently Asked Question',
+                'items' => [
+                    [
+                        'question' => 'Why do enterprises in Indonesia need a cyber security consultant?',
+                        'answer' => 'Cyber threats in Indonesia continue to rise, and regulations (such as UU PDP) mandate strict data protection. Cybersecurity consultants help identify blind spots missed by internal teams, provide independent validation, and ensure optimal regulatory compliance.',
+                    ],
+                    [
+                        'question' => 'When should an enterprise conduct a security assessment?',
+                        'answer' => 'Security assessments should be performed periodically (at least 1–2 times a year), before launching new critical systems or applications, after major infrastructure updates, or when preparing for compliance audits (such as ISO 27001 and PCI-DSS).',
+                    ],
+                    [
+                        'question' => 'What does a Cyber Security Consultant do?',
+                        'answer' => 'Consultants evaluate security architectures, conduct penetration testing, assess compliance risks, design security governance policies, and provide practical roadmaps to fortify your organization\'s cyber defense posture.',
+                    ],
+                    [
+                        'question' => 'Is DISC only for large enterprises?',
+                        'answer' => 'No. DISC services are designed to be flexible and scalable, adaptable for mid-market businesses to large enterprise organizations across banking, fintech, healthcare, logistics, and digital services.',
+                    ],
+                ],
+            ],
+            'cta_banner' => [
+                'title' => 'Understand Your Security Posture Risks',
+                'subtitle' => 'Discover vulnerabilities, understand risks, and define your next strategic steps with DISC.',
+                'cta_text' => 'Free Consultation',
+                'cta_url' => 'https://forms.cloud.microsoft/pages/responsepage.aspx?id=pmuMKTp9uEuBlt-qXfsxv71xA9X3CdBLgmi2RkLAy_ZUM045QlUzSDJGTzRRNzNSWlcxSVBXUkVVWS4u&route=shorturl',
+                'image' => '/assets/img/disc-shield.webp',
+            ],
+        ];
+
+        foreach ($discSlugs as $slug) {
+            Page::where('slug', $slug)->where('locale', 'en')->update([
+                'template' => 'disc',
+                'content_blocks' => $discContentEn,
+            ]);
+        }
+
+        Page::updateOrCreate(
+            ['slug' => 'defenxor-intelligence-security-consulting-disc', 'locale' => 'en'],
+            [
+                'title' => 'Cyber Security Consultant Indonesia | Defenxor DISC',
+                'template' => 'disc',
+                'status' => 'published',
+                'seo_title' => 'Cyber Security Consultant Indonesia | Defenxor DISC',
+                'seo_description' => 'Defenxor Intelligence Security Consulting (DISC) helps enterprises identify security gaps, manage risks, fulfill compliance requirements, and build an integrated security architecture.',
+                'sort_order' => 3,
+                'content_blocks' => $discContentEn,
             ]
         );
 

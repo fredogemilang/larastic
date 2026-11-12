@@ -4,10 +4,13 @@
     @php
         $b = $page->content_blocks ?? [];
         $isDims = ($page->slug === 'defenxor-intelligence-managed-security-dims' || $page->slug === 'dims' || $page->template === 'dims');
+        $isDisc = ($page->slug === 'defenxor-intelligence-security-consulting-disc' || $page->slug === 'disc' || $page->template === 'disc');
     @endphp
 
     @if($isDims)
         @include('static.pages.dims-content')
+    @elseif($isDisc)
+        @include('static.pages.disc-content')
     @else
     <main class="pt-24 pb-12">
         <!-- Hero Title -->
